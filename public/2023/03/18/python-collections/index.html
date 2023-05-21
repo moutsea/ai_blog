@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/l.svg">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/l.svg">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"www.ailinghang.club","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"livere","storage":true,"lazyload":false,"nav":null,"activeClass":"livere"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"manual","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="这篇文章为大家介绍Python当中一个很好用也是很基础的工具库，叫做collections。 collection在英文当中有容器的意思，所以顾名思义，这是一个容器的集合。这个库当中的容器很多，有一些不是很常用，本篇文章选择了其中最常用的几个，一起介绍给大家。 defaultdictdefaultdict可以说是这个库当中使用最简单的一个，并且它的定义也很简单，我们从名称基本上就能看得出来。它解决">
+<meta property="og:type" content="article">
+<meta property="og:title" content="详解Python collections工具库">
+<meta property="og:url" content="http://www.ailinghang.club/2023/03/18/python-collections/index.html">
+<meta property="og:site_name" content="Ai领航员">
+<meta property="og:description" content="这篇文章为大家介绍Python当中一个很好用也是很基础的工具库，叫做collections。 collection在英文当中有容器的意思，所以顾名思义，这是一个容器的集合。这个库当中的容器很多，有一些不是很常用，本篇文章选择了其中最常用的几个，一起介绍给大家。 defaultdictdefaultdict可以说是这个库当中使用最简单的一个，并且它的定义也很简单，我们从名称基本上就能看得出来。它解决">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-03-18T04:28:06.000Z">
+<meta property="article:modified_time" content="2023-03-18T04:35:27.383Z">
+<meta property="article:author" content="Ai领航员">
+<meta property="article:tag" content="collections">
+<meta property="article:tag" content="defaultdict">
+<meta property="article:tag" content="counter">
+<meta property="article:tag" content="deque">
+<meta property="article:tag" content="namedtuple">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://www.ailinghang.club/2023/03/18/python-collections/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>详解Python collections工具库 | Ai领航员</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+<!-- hexo injector head_end end --></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+    	<a target="_blank" rel="noopener" href="https://github.com/moutsea/ai_tutorial" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Ai领航员</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-planet">
+
+    <a href="/planet/" rel="section"><i class="fa fa-compass fa-fw"></i>知识星球</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://www.ailinghang.club/2023/03/18/python-collections/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/ai.jpg">
+      <meta itemprop="name" content="Ai领航员">
+      <meta itemprop="description" content="人工智能从零入门教程">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ai领航员">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          详解Python collections工具库
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2023-03-18 12:28:06 / 修改时间：12:35:27" itemprop="dateCreated datePublished" datetime="2023-03-18T12:28:06+08:00">2023-03-18</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Python/" itemprop="url" rel="index"><span itemprop="name">Python</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>2.6k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>2 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>这篇文章为大家介绍Python当中一个很好用也是很基础的工具库，叫做<code>collections</code>。</p>
+<p>collection在英文当中有容器的意思，所以顾名思义，这是一个容器的集合。这个库当中的容器很多，有一些不是很常用，本篇文章选择了其中最常用的几个，一起介绍给大家。</p>
+<h2 id="defaultdict"><a href="#defaultdict" class="headerlink" title="defaultdict"></a>defaultdict</h2><p><code>defaultdict</code>可以说是这个库当中使用最简单的一个，并且它的定义也很简单，我们从名称基本上就能看得出来。它解决的是我们使用<code>dict</code>当中最常见的问题，就是<code>key</code>为空的情况。</p>
+<p>在正常情况下，我们在<code>dict</code>中获取元素的时候，都需要考虑<code>key</code>为空的情况。如果不考虑这点，那么当我们获取了一个不存在的<code>key</code>，会导致系统抛出异常。我们当然可以在每次get之前写一个if判断，但是这很麻烦，比如：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> key <span class="keyword">in</span> <span class="built_in">dict</span>:</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">dict</span>[key]</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">None</span></span><br></pre></td></tr></table></figure>
+<p>当然，这是最笨的方法，<code>dict</code>当中为我们提供了带默认值的get方法。比如，我们可以写成：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">return</span> <span class="built_in">dict</span>.get(key, <span class="literal">None</span>)</span><br></pre></td></tr></table></figure>
+<p>这样，当<code>key</code>不在<code>dict</code>当中的时候，会自动返回我们设置的默认值。这个省去了很多麻烦的判断，但是在一些特殊情况下仍然存在一点问题。举个例子，比如当<code>key</code>存在重复，我们希望将<code>key</code>相同的<code>value</code>存进一个<code>list</code>当中，而不是只保留一个。这种情况下写成代码就会比较复杂：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">data = [(<span class="number">1</span>, <span class="number">3</span>), (<span class="number">2</span>, <span class="number">1</span>), (<span class="number">1</span>, <span class="number">4</span>), (<span class="number">2</span>, <span class="number">5</span>), (<span class="number">3</span>, <span class="number">7</span>)]</span><br><span class="line">d = &#123;&#125;</span><br><span class="line"><span class="keyword">for</span> k, v <span class="keyword">in</span> data:</span><br><span class="line">    <span class="keyword">if</span> k <span class="keyword">in</span> d:</span><br><span class="line">        d[k].append(v)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        d[k] = [v]</span><br></pre></td></tr></table></figure>
+<p>由于<code>dict</code>的<code>value</code>是一个list，所以我们还是需要判断是否为空，不能直接使用默认值，间接操作当然可以，但是还是不够简单：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> k, v <span class="keyword">in</span> data:</span><br><span class="line">    cur = d.get(k, [])</span><br><span class="line">    cur.append(v)</span><br><span class="line">    d[k] = v</span><br></pre></td></tr></table></figure>
+<p>这和使用<code>if</code>区别并不大，为了完美解决这个问题，我们可以使用<code>collections</code>当中的<code>defaultdict</code>：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> collections <span class="keyword">import</span> defaultdict</span><br><span class="line">d = defaultdict(<span class="built_in">list</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> k, v <span class="keyword">in</span> data:</span><br><span class="line">    d[k].append(v)</span><br></pre></td></tr></table></figure>
+<p>使用<code>defaultdict</code>之后，如果<code>key</code>不存在，容器会自动返回我们预先设置的默认值。需要注意的是<code>defaultdict</code>传入的默认值可以是一个类型也可以是一个方法。如果我们传入<code>int</code>，那么默认值会被设置成<code>int()</code>的结果，也就是0，如果我们想要自定义或者修改，我们可以传入一个方法，比如：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">d = defaultdict(<span class="keyword">lambda</span>: <span class="number">3</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> k, v <span class="keyword">in</span> data:</span><br><span class="line">    d[k] += v</span><br></pre></td></tr></table></figure>
+<h2 id="Counter"><a href="#Counter" class="headerlink" title="Counter"></a>Counter</h2><p>这是一个非常常用和非常强大的工具，我们经常用到。</p>
+<p>在我们实际的编程当中，我们经常遇到一个问题，就是数数和排序。比如说我们在分析文本的时候，会得到一堆单词。其中可能有大量的长尾词，在整个文本当中可能只出现过寥寥几次。于是我们希望计算一下这些单词出现过的数量，只保留出现次数最高的若干个。</p>
+<p>这个需求让我们自己实现当然也不困难，我们完全可以创建一个<code>dict</code>，然后对这些单词一个一个遍历。原本我们还需要考虑单词之前没有出现过的情况，如果我们上面说的<code>defaultdict</code>，又要简单许多。但是我们还是少不了计数然后排序的步骤，如果使用Counter这个步骤会缩减成一行代码。</p>
+<p>举个例子：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">words = [<span class="string">&#x27;apple&#x27;</span>, <span class="string">&#x27;apple&#x27;</span>, <span class="string">&#x27;pear&#x27;</span>, <span class="string">&#x27;watermelon&#x27;</span>, <span class="string">&#x27;pear&#x27;</span>, <span class="string">&#x27;peach&#x27;</span>]</span><br><span class="line"><span class="keyword">from</span> collections <span class="keyword">import</span> Counter</span><br><span class="line">counter = Counter(words)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(counter)</span><br><span class="line"></span><br><span class="line">Counter(&#123;<span class="string">&#x27;apple&#x27;</span>: <span class="number">2</span>, <span class="string">&#x27;pear&#x27;</span>: <span class="number">2</span>, <span class="string">&#x27;watermelon&#x27;</span>: <span class="number">1</span>, <span class="string">&#x27;peach&#x27;</span>: <span class="number">1</span>&#125;)</span><br></pre></td></tr></table></figure>
+<p>我们直接将一个<code>list</code>传入<code>Counter</code>中作为参数，它会自动为我们替当中的每个元素计数。</p>
+<p>如果我们要筛选<code>topK</code>，也非常简单，它为我们提供了<code>most_common</code>方法，我们只需要传入需要求的K即可：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">counter.most_common(<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">[(<span class="string">&#x27;apple&#x27;</span>, <span class="number">2</span>)]</span><br></pre></td></tr></table></figure>
+<p>除此之外，它的构造函数还接收<code>dict</code>类型。我们可以直接通过一个<code>value</code>是<code>int</code>类型的<code>dict</code>来初始化一个<code>Counter</code>，比如：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">c = Counter(&#123;<span class="string">&#x27;apple&#x27;</span>: <span class="number">5</span>, <span class="string">&#x27;pear&#x27;</span>: <span class="number">4</span>&#125;)</span><br><span class="line">c = Counter(apple=<span class="number">4</span>, pear=<span class="number">3</span>)</span><br></pre></td></tr></table></figure>
+<p>并且，它还支持加减法的操作，比如我们可以将两个<code>Counter</code>相加，它会自动将两个<code>Counter</code>合并，相同的<code>key</code>对应的<code>value</code>累加。相减也是同理，会将能对应的<code>value</code>做减法，被减的<code>key</code>对应不上的会保留，而减数中对应不上的<code>key</code>则会被丢弃。并且需要注意，<code>Counter</code>支持<code>value</code>为负数。</p>
+<h2 id="deque"><a href="#deque" class="headerlink" title="deque"></a>deque</h2><p>我们都知道<code>queue</code>是队列，<code>deque</code>也是队列，不过稍稍特殊一些，是双端队列。对于<code>queue</code>来说，只允许在队尾插入元素，在队首弹出元素。而<code>deque</code>既然称为双端队列，那么说明它的队首和队尾都支持元素的插入和弹出。相比于普通的队列，要更加灵活一些。</p>
+<p>除了常用的<code>clear、copy、count、extend</code>等api之外，<code>deque</code>当中最常用也是最核心的api主要是<code>append、pop、appendleft</code>和<code>popleft</code>。从名字上我们就看得出来，<code>append</code>和<code>pop</code>和<code>list</code>的<code>append</code>和<code>pop</code>一样，而<code>appendleft</code>和<code>popleft</code>则是在队列左侧，也就是头部进行<code>pop</code>和<code>append</code>的操作。非常容易理解。</p>
+<p>在日常的使用当中，真正用到双端队列的算法其实不太多。大多数情况下我们使用<code>deque</code>主要有两个原因，第一个原因是<code>deque</code>受到GIL的管理，它是线程安全的。而<code>list</code>则没有GIL锁，因此不是线程安全的。也就是说在并发场景下，<code>list</code>可能会导致一致性问题，而<code>deque</code>不会。另一个原因是<code>deque</code>支持固定长度，当长度满了之后，当我们继续<code>append</code>时，它会自动弹出最老插入的数据。</p>
+<p>比如说当我们拥有海量的数据，我们不知道它的数量，但是想要保留最后出现的指定数量的数据的时候，就可以使用<code>deque</code>。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> collections <span class="keyword">import</span> deque</span><br><span class="line">dque = deque(maxlen=<span class="number">10</span>)</span><br><span class="line"><span class="comment"># 假设我们想要从文件当中获取最后10条数据</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> f.read():</span><br><span class="line">    dque.append(i)</span><br></pre></td></tr></table></figure>
+<h2 id="namedtuple"><a href="#namedtuple" class="headerlink" title="namedtuple"></a>namedtuple</h2><p><code>namedtuple</code>很特殊，它涉及到元编程的概念。简单介绍一下元编程的概念，我们不做过多的深入。简而言之，就是在常见的面向对象当中。我们都是定义类，然后通过类的构造函数来创建实例。而元编程指的是我们定义元类，根据元类创建出来的并不是一个实例，而是一个类。如果用模具和成品来分别比喻类和实例的话，元类相当于是模具的模具。</p>
+<p><code>namedtuple</code>是一个非常简单的元类，通过它我们可以非常方便地定义我们想要的类。</p>
+<p>它的用法很简单，我们直接来看例子。比如如果我们想要定义一个学生类，这个类当中有name、score、age这三个字段，那么这个类会写成：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Student</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, name=<span class="literal">None</span>, score=<span class="literal">None</span>, age=<span class="literal">None</span></span>):</span><br><span class="line">        self.name = name</span><br><span class="line">        self.score = score</span><br><span class="line">        self.age = age</span><br></pre></td></tr></table></figure>
+<p>这还只是粗略的写法，如果考虑规范，还需要定义<code>property</code>等注解，又需要很多代码。如果我们使用<code>namedtuple</code>可以简化这个工作，我们来看代码：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> collections <span class="keyword">import</span> namedtuple</span><br><span class="line"><span class="comment"># 这个是类，columns也可以写成&#x27;name score age&#x27;，即用空格分开</span></span><br><span class="line">Student = namedtuple(<span class="string">&#x27;Student&#x27;</span>, [<span class="string">&#x27;name&#x27;</span>, <span class="string">&#x27;score&#x27;</span>, <span class="string">&#x27;age&#x27;</span>])</span><br><span class="line"></span><br><span class="line"><span class="comment"># 这个是实例</span></span><br><span class="line">student = Student(name=<span class="string">&#x27;xiaoming&#x27;</span>, score=<span class="number">99</span>, age=<span class="number">10</span>)</span><br><span class="line"><span class="built_in">print</span>(student.name)</span><br></pre></td></tr></table></figure>
+<p>通过使用<code>namedtuple</code>，我们只需要一行就定义了一个类，但是这样定义的类是没有缺失值的，但是<code>namedtuple</code>很强大，我们可以通过传入<code>defaults</code>参数来定义缺失值。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Student = namedtuple(<span class="string">&#x27;Student&#x27;</span>, [<span class="string">&#x27;name&#x27;</span>, <span class="string">&#x27;score&#x27;</span>, <span class="string">&#x27;age&#x27;</span>], defaults=(<span class="number">0</span>, <span class="number">0</span>))</span><br></pre></td></tr></table></figure>
+<p>可以注意到，虽然我们定义了三个字段，但是我们只设置了两个缺失值。在这种情况下，<code>namedtuple</code>会自动将缺失值匹配上<code>score</code>和<code>age</code>两个字段。因为在Python的规范当中，必选参数一定在可选参数前面。</p>
+<p>细数一下，我们今天的文章当中介绍了<code>defaultdict、Counter、deque</code>和<code>namedtuple</code>这四种数据结构的用法。除了这四个之外，<code>collections</code>库当中还有一些其他的工具类，只是我们用的频率稍稍低一些，加上由于篇幅的原因，这里就不多做赘述了。感兴趣的同学可以自行查看相关的api和文档。</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/collections/" rel="tag"># collections</a>
+              <a href="/tags/defaultdict/" rel="tag"># defaultdict</a>
+              <a href="/tags/counter/" rel="tag"># counter</a>
+              <a href="/tags/deque/" rel="tag"># deque</a>
+              <a href="/tags/namedtuple/" rel="tag"># namedtuple</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2023/03/15/python-diy-sort/" rel="prev" title="详解Python自定义排序">
+      <i class="fa fa-chevron-left"></i> 详解Python自定义排序
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2023/03/18/python-generator/" rel="next" title="详解Python迭代器与生成器">
+      详解Python迭代器与生成器 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="lv-container" data-id="city" data-uid="MTAyMC81ODEyOC8zNDU5MQ=="></div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#defaultdict"><span class="nav-number">1.</span> <span class="nav-text">defaultdict</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Counter"><span class="nav-number">2.</span> <span class="nav-text">Counter</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#deque"><span class="nav-number">3.</span> <span class="nav-text">deque</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#namedtuple"><span class="nav-number">4.</span> <span class="nav-text">namedtuple</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Ai领航员"
+      src="/images/ai.jpg">
+  <p class="site-author-name" itemprop="name">Ai领航员</p>
+  <div class="site-description" itemprop="description">人工智能从零入门教程</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">29</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">33</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/moutsea/ai_tutorial" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;moutsea&#x2F;ai_tutorial" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/suyuxuan94@qq.com" title="E-Mail → suyuxuan94@qq.com"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.zhihu.com/people/coderliangt" title="知乎 → https:&#x2F;&#x2F;www.zhihu.com&#x2F;people&#x2F;coderliangt" rel="noopener" target="_blank"><i class="fal fa-zhihu fa-fw"></i>知乎</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ai领航员</span>
+</div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="站点总字数">72k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">1:06</span>
+  </span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+        
+
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='0,0,255' opacity='0.5' zIndex='-1' count='99' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+  <script defer src="/lib/three/three.min.js"></script>
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script>
+NexT.utils.loadComments(document.querySelector('#lv-container'), () => {
+  window.livereOptions = {
+    refer: location.pathname.replace(CONFIG.root, '').replace('index.html', '')
+  };
+  (function(d, s) {
+    var j, e = d.getElementsByTagName(s)[0];
+    if (typeof LivereTower === 'function') { return; }
+    j = d.createElement(s);
+    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+    j.async = true;
+    e.parentNode.insertBefore(j, e);
+  })(document, 'script');
+});
+</script>
+
+</body>
+</html>

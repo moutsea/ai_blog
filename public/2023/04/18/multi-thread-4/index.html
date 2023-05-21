@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/l.svg">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/l.svg">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"www.ailinghang.club","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"livere","storage":true,"lazyload":false,"nav":null,"activeClass":"livere"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"manual","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="这篇文章，我们一起来聊聊多线程开发当中死锁的问题。 死锁死锁的原理非常简单，用一句话就可以描述完。就是当多线程访问多个锁的时候，不同的锁被不同的线程持有，它们都在等待其他线程释放出锁来，于是便陷入了永久等待。比如A线程持有1号锁，等待2号锁，B线程持有2号锁等待1号锁，那么它们永远也等不到执行的那天，这种情况就叫做死锁。 关于死锁有一个著名的问题叫做哲学家就餐问题，有5个哲学家围坐在一起，他们每个">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python中死锁问题巧妙解决办法">
+<meta property="og:url" content="http://www.ailinghang.club/2023/04/18/multi-thread-4/index.html">
+<meta property="og:site_name" content="Ai领航员">
+<meta property="og:description" content="这篇文章，我们一起来聊聊多线程开发当中死锁的问题。 死锁死锁的原理非常简单，用一句话就可以描述完。就是当多线程访问多个锁的时候，不同的锁被不同的线程持有，它们都在等待其他线程释放出锁来，于是便陷入了永久等待。比如A线程持有1号锁，等待2号锁，B线程持有2号锁等待1号锁，那么它们永远也等不到执行的那天，这种情况就叫做死锁。 关于死锁有一个著名的问题叫做哲学家就餐问题，有5个哲学家围坐在一起，他们每个">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://moutsea-blog.oss-cn-hangzhou.aliyuncs.com/007S8ZIlgy1ghdbrswecrj30sg0tie4y.jpg">
+<meta property="og:image" content="https://moutsea-blog.oss-cn-hangzhou.aliyuncs.com/007S8ZIlgy1ghdcveh1o3j30mr025aa5.jpg">
+<meta property="article:published_time" content="2023-04-18T01:18:03.000Z">
+<meta property="article:modified_time" content="2023-04-18T01:21:19.005Z">
+<meta property="article:author" content="Ai领航员">
+<meta property="article:tag" content="多线程">
+<meta property="article:tag" content="多进程">
+<meta property="article:tag" content="并发">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://moutsea-blog.oss-cn-hangzhou.aliyuncs.com/007S8ZIlgy1ghdbrswecrj30sg0tie4y.jpg">
+
+<link rel="canonical" href="http://www.ailinghang.club/2023/04/18/multi-thread-4/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Python中死锁问题巧妙解决办法 | Ai领航员</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+<!-- hexo injector head_end end --></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+    	<a target="_blank" rel="noopener" href="https://github.com/moutsea/ai_tutorial" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Ai领航员</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-planet">
+
+    <a href="/planet/" rel="section"><i class="fa fa-compass fa-fw"></i>知识星球</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://www.ailinghang.club/2023/04/18/multi-thread-4/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/ai.jpg">
+      <meta itemprop="name" content="Ai领航员">
+      <meta itemprop="description" content="人工智能从零入门教程">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ai领航员">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Python中死锁问题巧妙解决办法
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2023-04-18 09:18:03 / 修改时间：09:21:19" itemprop="dateCreated datePublished" datetime="2023-04-18T09:18:03+08:00">2023-04-18</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Python/" itemprop="url" rel="index"><span itemprop="name">Python</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>1.9k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>2 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>这篇文章，我们一起来聊聊多线程开发当中死锁的问题。</p>
+<h2 id="死锁"><a href="#死锁" class="headerlink" title="死锁"></a>死锁</h2><p>死锁的原理非常简单，用一句话就可以描述完。就是当多线程访问多个锁的时候，<strong>不同的锁被不同的线程持有</strong>，它们都在等待其他线程释放出锁来，于是便陷入了永久等待。比如A线程持有1号锁，等待2号锁，B线程持有2号锁等待1号锁，那么它们永远也等不到执行的那天，这种情况就叫做死锁。</p>
+<p>关于死锁有一个著名的问题叫做<strong>哲学家就餐</strong>问题，有5个哲学家围坐在一起，他们每个人需要拿到两个叉子才可以吃饭。如果他们同时拿起自己左手边的叉子，那么就会永远等待右手边的叉子释放出来。这样就陷入了永久等待，于是这些哲学家都会饿死。</p>
+<p><img src="https://moutsea-blog.oss-cn-hangzhou.aliyuncs.com/007S8ZIlgy1ghdbrswecrj30sg0tie4y.jpg" alt="img"></p>
+<p>这是一个很形象的模型，因为在计算机并发场景当中，一些<strong>资源的数量往往是有限的</strong>。很有可能出现多个线程抢占的情况，如果处理不好就会发生大家都获取了一部分资源，然后在等待另外的资源的情况。</p>
+<p>对于死锁的问题有多种解决方法，这里我们介绍比较简单的一种，就是对这些锁进行编号。我们规定当一个线程需要同时持有多个锁的时候，<strong>必须要按照序号升序的顺序对这些锁进行访问</strong>。通过上下文管理器我们可以很容易实现这一点。</p>
+<h2 id="上下文管理器"><a href="#上下文管理器" class="headerlink" title="上下文管理器"></a>上下文管理器</h2><p>首先我们来简单介绍一下上下文管理器，上下文管理器我们其实经常使用，比如我们经常使用的<strong>with语句</strong>就是一个上下文管理器的经典使用。当我们通过<code>with</code>语句打开文件的时候，它会自动替我们处理好文件读取之后的关闭以及抛出异常的处理，可以节约我们大量的代码。</p>
+<p>同样我们也可以自己定义一个上下文处理器，其实很简单，我们只需要实现<code>__enter__</code>和<code>__exit__</code>这两个函数即可。<code>__enter__</code>函数用来实现进入资源之前的操作和处理，那么显然<code>__exit__</code>函数对应的就是使用资源结束之后或者是出现异常的处理逻辑。有了这两个函数之后，我们就有了自己的上下文处理类了。</p>
+<p>我们来看一个样例：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Sample</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__enter__</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;enter resources&#x27;</span>)</span><br><span class="line">        <span class="keyword">return</span> self</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__exit__</span>(<span class="params">self, exc_type, exc_val, exc_tb</span>):</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;exit&#x27;</span>)</span><br><span class="line">        <span class="comment"># print(exc_type)</span></span><br><span class="line">        <span class="comment"># print(exc_val)</span></span><br><span class="line">        <span class="comment"># print(exc_tb)</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">doSomething</span>(<span class="params">self</span>):</span><br><span class="line">        a = <span class="number">1</span>/<span class="number">1</span></span><br><span class="line">        <span class="keyword">return</span> a</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">getSample</span>():</span><br><span class="line">    <span class="keyword">return</span> Sample()</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    <span class="keyword">with</span> getSample() <span class="keyword">as</span> sample:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;do something&#x27;</span>)</span><br><span class="line">        sample.doSomething()</span><br></pre></td></tr></table></figure>
+<p>当我们运行这段代码的时候，屏幕上打印的结果和我们的预期是一致的。</p>
+<p><img src="https://moutsea-blog.oss-cn-hangzhou.aliyuncs.com/007S8ZIlgy1ghdcveh1o3j30mr025aa5.jpg" alt="image-20200803091558632"></p>
+<p>我们观察一下<code>__exit__</code>函数，会发现它的参数有4个，<strong>后面的三个参数对应的是抛出异常的情况</strong>。<code>type</code>对应异常的类型，<code>val</code>对应异常时的输出值，<code>trace</code>对应异常抛出时的运行堆栈。这些信息都是我们排查异常的时候经常需要用到的信息，通过这三个字段，我们可以根据我们的需要对可能出现的异常进行自定义的处理。</p>
+<p>实现上下文管理器并不一定要通过类实现，Python当中也提供了上下文管理的注解，通过使用注解我们可以很方便地实现上下文管理。我们同样也来看一个例子：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> time</span><br><span class="line"><span class="keyword">from</span> contextlib <span class="keyword">import</span> contextmanager</span><br><span class="line"></span><br><span class="line"><span class="meta">@contextmanager</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">timethis</span>(<span class="params">label</span>):</span><br><span class="line">    start = time.time()</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        <span class="keyword">yield</span></span><br><span class="line">    <span class="keyword">finally</span>:</span><br><span class="line">        end = time.time()</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;&#123;&#125;: &#123;&#125;&#x27;</span>.<span class="built_in">format</span>(label, end - start))</span><br><span class="line">        </span><br><span class="line">        </span><br><span class="line"><span class="keyword">with</span> timethis(<span class="string">&#x27;timer&#x27;</span>):</span><br><span class="line">    <span class="keyword">pass</span></span><br></pre></td></tr></table></figure>
+<p>在这个方法当中yield之前的部分相当于<code>__enter__</code>函数，<code>yield</code>之后的部分相当于<code>__exit__</code>。如果出现异常会在try语句当中抛出，那么我们编写except对异常进行处理即可。</p>
+<h2 id="避免死锁"><a href="#避免死锁" class="headerlink" title="避免死锁"></a>避免死锁</h2><p>了解了上下文管理器之后，我们要做的就是<strong>在lock的外面包装一层</strong>，使得我们在获取和释放锁的时候可以根据我们的需要，对锁进行排序，按照升序的顺序进行持有。</p>
+<p>这段代码源于Python的著名进阶书籍《Python cookbook》，非常经典：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> contextlib <span class="keyword">import</span> contextmanager</span><br><span class="line"></span><br><span class="line"><span class="comment"># 用来存储local的数据</span></span><br><span class="line">_local = threading.local()</span><br><span class="line"></span><br><span class="line"><span class="meta">@contextmanager</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">acquire</span>(<span class="params">*locks</span>):</span><br><span class="line">	<span class="comment"># 对锁按照id进行排序</span></span><br><span class="line">    locks = <span class="built_in">sorted</span>(locks, key=<span class="keyword">lambda</span> x: <span class="built_in">id</span>(x))</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 如果已经持有锁当中的序号有比当前更大的，说明策略失败</span></span><br><span class="line">    acquired = <span class="built_in">getattr</span>(_local,<span class="string">&#x27;acquired&#x27;</span>,[])</span><br><span class="line">    <span class="keyword">if</span> acquired <span class="keyword">and</span> <span class="built_in">max</span>(<span class="built_in">id</span>(lock) <span class="keyword">for</span> lock <span class="keyword">in</span> acquired) &gt;= <span class="built_in">id</span>(locks[<span class="number">0</span>]):</span><br><span class="line">        <span class="keyword">raise</span> RuntimeError(<span class="string">&#x27;Lock Order Violation&#x27;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 获取所有锁</span></span><br><span class="line">    acquired.extend(locks)</span><br><span class="line">    _local.acquired = acquired</span><br><span class="line"></span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        <span class="keyword">for</span> lock <span class="keyword">in</span> locks:</span><br><span class="line">            lock.acquire()</span><br><span class="line">        <span class="keyword">yield</span></span><br><span class="line">    <span class="keyword">finally</span>:</span><br><span class="line">        <span class="comment"># 倒叙释放</span></span><br><span class="line">        <span class="keyword">for</span> lock <span class="keyword">in</span> <span class="built_in">reversed</span>(locks):</span><br><span class="line">            lock.release()</span><br><span class="line">        <span class="keyword">del</span> acquired[-<span class="built_in">len</span>(locks):]</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>这段代码写得非常漂亮，可读性很高，逻辑我们都应该能看懂，但是有一个小问题是这里用到了<strong><code>threading.local</code></strong>这个组件。</p>
+<p>它是一个多线程场景当中的<strong>共享变量</strong>，虽然说是共享的，但是对于每个线程来说读取到的值都是独立的。听起来有些难以理解，其实我们可以将它理解成一个<code>dict</code>，<code>dict</code>的key是每一个线程的id，value是一个存储数据的dict。每个线程在访问local变量的时候，都相当于先通过线程id获取了一个独立的dict，再对这个dict进行的操作。</p>
+<p>看起来我们在使用的时候直接使用了<code>_local</code>，这是因为通过线程id先进行查询的步骤在其中封装了。不明就里的话可能会觉得有些难以理解。</p>
+<p>我们再来看下这个acquire的使用：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">x_lock = threading.Lock()</span><br><span class="line">y_lock = threading.Lock()</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">thread_1</span>():</span><br><span class="line">    <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">        <span class="keyword">with</span> acquire(x_lock, y_lock):</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">&#x27;Thread-1&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">thread_2</span>():</span><br><span class="line">    <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">        <span class="keyword">with</span> acquire(y_lock, x_lock):</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">&#x27;Thread-2&#x27;</span>)</span><br><span class="line"></span><br><span class="line">t1 = threading.Thread(target=thread_1)</span><br><span class="line">t1.start()</span><br><span class="line"></span><br><span class="line">t2 = threading.Thread(target=thread_2)</span><br><span class="line">t2.start()</span><br></pre></td></tr></table></figure>
+<p>运行一下会发现没有出现死锁的情况，但如果我们把代码稍加调整，写成这样，那么就会触发异常了。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">thread_1</span>():</span><br><span class="line">    <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">        <span class="keyword">with</span> acquire(x_lock):</span><br><span class="line">            <span class="keyword">with</span> acquire(y_lock):</span><br><span class="line">	            <span class="built_in">print</span>(<span class="string">&#x27;Thread-1&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">thread_2</span>():</span><br><span class="line">    <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">        <span class="keyword">with</span> acquire(y_lock):</span><br><span class="line">            <span class="keyword">with</span> acquire(x_lock):</span><br><span class="line">	            <span class="built_in">print</span>(<span class="string">&#x27;Thread-1&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<p>因为我们把锁写成了层次结构，这样就没办法进行排序保证持有的有序性了，那么就会触发我们代码当中定义的异常。</p>
+<p>最后我们再来看下哲学家就餐问题，通过我们自己实现的acquire函数我们可以非常方便地解决他们死锁吃不了饭的问题。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> threading</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">philosopher</span>(<span class="params">left, right</span>):</span><br><span class="line">    <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">        <span class="keyword">with</span> acquire(left, right):</span><br><span class="line">             <span class="built_in">print</span>(threading.currentThread(), <span class="string">&#x27;eating&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 叉子的数量</span></span><br><span class="line">NSTICKS = <span class="number">5</span></span><br><span class="line">chopsticks = [threading.Lock() <span class="keyword">for</span> n <span class="keyword">in</span> <span class="built_in">range</span>(NSTICKS)]</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> n <span class="keyword">in</span> <span class="built_in">range</span>(NSTICKS):</span><br><span class="line">    t = threading.Thread(target=philosopher,</span><br><span class="line">                         args=(chopsticks[n],chopsticks[(n+<span class="number">1</span>) % NSTICKS]))</span><br><span class="line">    t.start()</span><br></pre></td></tr></table></figure>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>关于死锁的问题，对锁进行排序<strong>只是其中的一种解决方案</strong>，除此之外还有很多解决死锁的模型。比如我们可以让线程在尝试持有新的锁失败的时候主动放弃所有目前已经持有的锁，比如我们可以设置机制检测死锁的发生并对其进行处理等等。发散出去其实有很多种方法，这些方法起作用的原理各不相同，其中涉及大量操作系统的基础概念和知识，感兴趣的同学可以深入研究一下这个部分，一定会对操作系统以及锁的使用有一个深刻的认识。</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" rel="tag"># 多线程</a>
+              <a href="/tags/%E5%A4%9A%E8%BF%9B%E7%A8%8B/" rel="tag"># 多进程</a>
+              <a href="/tags/%E5%B9%B6%E5%8F%91/" rel="tag"># 并发</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2023/04/18/multi-thread-3/" rel="prev" title="Python中并发与锁">
+      <i class="fa fa-chevron-left"></i> Python中并发与锁
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2023/04/18/python-routine/" rel="next" title="详解Python中协程的使用">
+      详解Python中协程的使用 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="lv-container" data-id="city" data-uid="MTAyMC81ODEyOC8zNDU5MQ=="></div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%AD%BB%E9%94%81"><span class="nav-number">1.</span> <span class="nav-text">死锁</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%8A%E4%B8%8B%E6%96%87%E7%AE%A1%E7%90%86%E5%99%A8"><span class="nav-number">2.</span> <span class="nav-text">上下文管理器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%81%BF%E5%85%8D%E6%AD%BB%E9%94%81"><span class="nav-number">3.</span> <span class="nav-text">避免死锁</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">4.</span> <span class="nav-text">总结</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Ai领航员"
+      src="/images/ai.jpg">
+  <p class="site-author-name" itemprop="name">Ai领航员</p>
+  <div class="site-description" itemprop="description">人工智能从零入门教程</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">29</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">33</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/moutsea/ai_tutorial" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;moutsea&#x2F;ai_tutorial" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/suyuxuan94@qq.com" title="E-Mail → suyuxuan94@qq.com"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.zhihu.com/people/coderliangt" title="知乎 → https:&#x2F;&#x2F;www.zhihu.com&#x2F;people&#x2F;coderliangt" rel="noopener" target="_blank"><i class="fal fa-zhihu fa-fw"></i>知乎</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ai领航员</span>
+</div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="站点总字数">72k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">1:06</span>
+  </span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+        
+
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='0,0,255' opacity='0.5' zIndex='-1' count='99' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+  <script defer src="/lib/three/three.min.js"></script>
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script>
+NexT.utils.loadComments(document.querySelector('#lv-container'), () => {
+  window.livereOptions = {
+    refer: location.pathname.replace(CONFIG.root, '').replace('index.html', '')
+  };
+  (function(d, s) {
+    var j, e = d.getElementsByTagName(s)[0];
+    if (typeof LivereTower === 'function') { return; }
+    j = d.createElement(s);
+    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+    j.async = true;
+    e.parentNode.insertBefore(j, e);
+  })(document, 'script');
+});
+</script>
+
+</body>
+</html>

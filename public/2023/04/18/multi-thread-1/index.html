@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/l.svg">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/l.svg">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"www.ailinghang.club","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"livere","storage":true,"lazyload":false,"nav":null,"activeClass":"livere"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"manual","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="今天这篇文章我们继续多线程的话题。 上篇文章当中我们简单介绍了线程和进程的概念，以及在Python当中如何在主线程之外创建其他线程，并且还了解了用户级线程和后台线程的区别以及使用方法。今天我们来看看线程的其他使用，比如如何停止一个线程，线程之间的Event用法等等。 停止线程利用Threading库我们可以很方便地创建线程，让它按照我们的想法执行我们想让它执行的事情，从而加快程序运行的效率。然而有">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python通过Event与信号量感知线程状态">
+<meta property="og:url" content="http://www.ailinghang.club/2023/04/18/multi-thread-1/index.html">
+<meta property="og:site_name" content="Ai领航员">
+<meta property="og:description" content="今天这篇文章我们继续多线程的话题。 上篇文章当中我们简单介绍了线程和进程的概念，以及在Python当中如何在主线程之外创建其他线程，并且还了解了用户级线程和后台线程的区别以及使用方法。今天我们来看看线程的其他使用，比如如何停止一个线程，线程之间的Event用法等等。 停止线程利用Threading库我们可以很方便地创建线程，让它按照我们的想法执行我们想让它执行的事情，从而加快程序运行的效率。然而有">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://moutsea-blog.oss-cn-hangzhou.aliyuncs.com/007S8ZIlgy1ggh3b5y6tmj30mx011mx6.jpg">
+<meta property="og:image" content="https://moutsea-blog.oss-cn-hangzhou.aliyuncs.com/007S8ZIlgy1ggh3b57xvoj30ga03kdfq.jpg">
+<meta property="article:published_time" content="2023-04-18T00:56:01.000Z">
+<meta property="article:modified_time" content="2023-04-18T01:00:34.907Z">
+<meta property="article:author" content="Ai领航员">
+<meta property="article:tag" content="多线程">
+<meta property="article:tag" content="多进程">
+<meta property="article:tag" content="并发">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://moutsea-blog.oss-cn-hangzhou.aliyuncs.com/007S8ZIlgy1ggh3b5y6tmj30mx011mx6.jpg">
+
+<link rel="canonical" href="http://www.ailinghang.club/2023/04/18/multi-thread-1/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Python通过Event与信号量感知线程状态 | Ai领航员</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+<!-- hexo injector head_end end --></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+    	<a target="_blank" rel="noopener" href="https://github.com/moutsea/ai_tutorial" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Ai领航员</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-planet">
+
+    <a href="/planet/" rel="section"><i class="fa fa-compass fa-fw"></i>知识星球</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://www.ailinghang.club/2023/04/18/multi-thread-1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/ai.jpg">
+      <meta itemprop="name" content="Ai领航员">
+      <meta itemprop="description" content="人工智能从零入门教程">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ai领航员">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Python通过Event与信号量感知线程状态
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2023-04-18 08:56:01 / 修改时间：09:00:34" itemprop="dateCreated datePublished" datetime="2023-04-18T08:56:01+08:00">2023-04-18</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Python/" itemprop="url" rel="index"><span itemprop="name">Python</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>2.1k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>2 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>今天这篇文章我们继续多线程的话题。</p>
+<p>上篇文章当中我们简单介绍了线程和进程的概念，以及在Python当中如何在主线程之外创建其他线程，并且还了解了<strong>用户级线程和后台线程</strong>的区别以及使用方法。今天我们来看看线程的其他使用，比如如何停止一个线程，线程之间的Event用法等等。</p>
+<h2 id="停止线程"><a href="#停止线程" class="headerlink" title="停止线程"></a>停止线程</h2><p>利用<code>Threading</code>库我们可以很方便地创建线程，让它按照我们的想法执行我们想让它执行的事情，从而加快程序运行的效率。然而有一点坑爹的是，线程创建之后，就交给了操作系统执行，<strong>我们无法直接结束一个线程，也无法给它发送信号，无法调整它的调度</strong>，也没有其他高级操作。如果想要相关的功能，只能自己开发。</p>
+<p>怎么开发呢？</p>
+<p>我们创建线程的时候指定了<code>target</code>等于一个我们想让它执行的函数，<strong>这个函数并不一定是全局函数，实际上也可以是一个对象中的函数</strong>。如果是对象中的函数，那么我们就可以在这个函数当中获取到对象中的其他信息，我们可以利用这一点来实现手动控制线程的停止。</p>
+<p>说起来好像不太好理解，但是看下代码真的非常简单：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> time</span><br><span class="line"><span class="keyword">from</span> threading <span class="keyword">import</span> Thread</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">TaskWithSwitch</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self</span>):</span><br><span class="line">        self._running = <span class="literal">True</span></span><br><span class="line">        </span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">terminate</span>(<span class="params">self</span>):</span><br><span class="line">        self._running = <span class="literal">False</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">run</span>(<span class="params">self, n</span>):</span><br><span class="line">        <span class="keyword">while</span> self._running <span class="keyword">and</span> n &gt; <span class="number">0</span>:</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">&#x27;Running &#123;&#125;&#x27;</span>.<span class="built_in">format</span>(n))</span><br><span class="line">            n -= <span class="number">1</span></span><br><span class="line">            time.sleep(<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">c = TaskWithSwitch()</span><br><span class="line">t = Thread(target=c.run, args=(<span class="number">10</span>, ))</span><br><span class="line">t.start()</span><br><span class="line">c.terminate()</span><br><span class="line">t.join()</span><br></pre></td></tr></table></figure>
+<p>如果你运行这段代码，会发现屏幕上只输出了10，因为我们将<code>_running</code>这个字段置为<code>False</code>之后，下次循环的时候不再满足循环条件，它就会自己退出了。</p>
+<p><img src="https://moutsea-blog.oss-cn-hangzhou.aliyuncs.com/007S8ZIlgy1ggh3b5y6tmj30mx011mx6.jpg" alt=""></p>
+<p>如果我们想要用多线程来读取<code>IO</code>，由于<strong>IO可能存在堵塞</strong>，所以可能会出现线程一直无法返回的情况。也就是说我们在循环内部卡死了，这个时候单纯用<code>_running</code>来判断还是不够的，我们需要<strong>在线程内部设置计时器</strong>，防止循环内部的卡死。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">IOTask</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self</span>):</span><br><span class="line">        self._running = <span class="literal">True</span></span><br><span class="line">        </span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">terminate</span>(<span class="params">self</span>):</span><br><span class="line">        self._running = <span class="literal">False</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">run</span>(<span class="params">self, sock</span>):</span><br><span class="line">        <span class="comment"># 在socket中设置计时器</span></span><br><span class="line">        sock.settimeout(<span class="number">10</span>)</span><br><span class="line">        <span class="keyword">while</span> self._running:</span><br><span class="line">            <span class="keyword">try</span>:</span><br><span class="line">                <span class="comment"># 由于设置了计时器，所以这里不会永久等待</span></span><br><span class="line">                data = sock.recv(<span class="number">1024</span>)</span><br><span class="line">                <span class="keyword">break</span></span><br><span class="line">            <span class="keyword">except</span> socket.timeout:</span><br><span class="line">                <span class="keyword">continue</span></span><br><span class="line">        <span class="keyword">return</span></span><br></pre></td></tr></table></figure>
+<h2 id="线程信号的传递"><a href="#线程信号的传递" class="headerlink" title="线程信号的传递"></a>线程信号的传递</h2><p>我们之所以如此费劲才能控制线程的运行，主要原因是<strong>线程的状态是不可知的</strong>，并且我们无法直接操作它，因为它是被操作系统管理的。我们运行的主线程和创建出来的线程是独立的，两者之间并没有从属关系，所以想要实现对线程的状态进行控制，往往需要我们通过其他手段来实现。</p>
+<p>我们来思考一个场景，假设我们有一个任务，需要在另外一个线程运行结束之后才能开始执行。要想要实现这一点，就<strong>必须对线程的状态有所感知</strong>，需要其他线程传递出信号来才行。我们可以使用<code>threading</code>中的<code>Event</code>工具来实现这一点。<code>Event</code>工具就是可以用来传递信号的，就好像是一个开关，当一个线程执行完成之后，会去启动这个开关。而这个开关控制着另外一段逻辑的运行。</p>
+<p>我们来看下样例代码：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> time</span><br><span class="line"><span class="keyword">from</span> threading <span class="keyword">import</span> Thread, Event</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">run_in_thread</span>():</span><br><span class="line">    time.sleep(<span class="number">1</span>)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;Thread is running&#x27;</span>)</span><br><span class="line"></span><br><span class="line">t = Thread(target=run_in_thread)</span><br><span class="line">t.start()</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;Main thread print&#x27;</span>)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>我们在线程里面就只做了输出一行提示符，没有其他任何逻辑。由于我们在<code>run_in_thread</code>函数当中沉睡了<code>1s</code>，所以一定是先输出<code>Main thread print</code>再输出的<code>Thread is running</code>。假设这个线程是一个很重要的任务，我们希望主线程能够等待它运行到一个阶段再往下执行，我们应该怎么办呢？</p>
+<p>注意，<strong>这里说的是运行到一个阶段，并不是运行结束</strong>。运行结束我们很好处理，可以通过<code>join</code>来完成。但如果不是运行结束，而是运行完成了某一个阶段，当然通过<code>join</code>也可以，但是会损害整体的效率。这个时候我们就必须要用上<code>Event</code>了。加上<code>Event</code>之后，我们再来看下代码：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> time</span><br><span class="line"><span class="keyword">from</span> threading <span class="keyword">import</span> Thread, Event</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">run_in_thread</span>(<span class="params">event</span>):</span><br><span class="line">    time.sleep(<span class="number">1</span>)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;Thread is running&#x27;</span>)</span><br><span class="line">    <span class="comment"># set一下event，这样外面wait的部分就会被启动</span></span><br><span class="line">    event.<span class="built_in">set</span>()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 初始化Event</span></span><br><span class="line">event = Event()</span><br><span class="line">t = Thread(target=run_in_thread, args=(event, ))</span><br><span class="line">t.start()</span><br><span class="line"></span><br><span class="line"><span class="comment"># event等待set</span></span><br><span class="line">event.wait()</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;Main thread print&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<p>整体的逻辑没有太多的修改，主要的是增加了几行关于<code>Event</code>的使用代码。</p>
+<p>我们<strong>如果要用到<code>Event</code>，最好在代码当中只使用一次</strong>。当然通过<code>Event</code>中的<code>clear</code>方法我们可以重置<code>Event</code>的值，但问题是我们没办法保证重置的这个逻辑会在<code>wait</code>之前执行。如果是在之后执行的，那么就会问题，并且在<code>debug</code>的时候会异常痛苦，因为<code>bug</code>不是必现的，而是有时候会出现有时候不会出现。这种情况往往都是因为多线程的使用问题。</p>
+<p>所以如果要多次使用开关和信号的话，不要使用<code>Event</code>，可以使用信号量。</p>
+<h2 id="信号量"><a href="#信号量" class="headerlink" title="信号量"></a>信号量</h2><p><code>Event</code>的问题在于如果多个线程在等待<code>Event</code>的发生，当它一旦被<code>set</code>的时候，那么这些线程都会同时执行。但有时候我们并不希望这样，我们<strong>希望可以控制这些线程一个一个地运行</strong>。如果想要做到这一点，<code>Event</code>就无法满足了，而需要使用信号量。</p>
+<p>信号量和<code>Event</code>的使用方法类似，不同的是，<strong>信号量可以保证每次只会启动一个线程</strong>。因为这两者的底层逻辑不太一致，对于<code>Event</code>来说，它更像是一个开关。一旦开关启动，所有和这个开关关联的逻辑都会同时执行。而信号量则像是许可证，只有拿到许可证的线程才能执行工作，并且许可证一次只发一张。</p>
+<p>想要使用信号量并不需要自己开发，<code>thread</code>库当中为我们提供了现成的工具——<code>Semaphore</code>，我们来看它的使用代码：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 工作线程</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">worker</span>(<span class="params">n, sema</span>):</span><br><span class="line">    <span class="comment"># 等待信号量</span></span><br><span class="line">    sema.acquire()</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;Working&#x27;</span>, n)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 初始化</span></span><br><span class="line">sema = threading.Semaphore(<span class="number">0</span>)</span><br><span class="line">nworkers = <span class="number">10</span></span><br><span class="line"><span class="keyword">for</span> n <span class="keyword">in</span> <span class="built_in">range</span>(nworkers):</span><br><span class="line">    t = threading.Thread(target=worker, args=(n, sema,))</span><br><span class="line">    t.start()</span><br></pre></td></tr></table></figure>
+<p>在上面的代码当中我们创建了10个线程，虽然这些线程都被启动了，但是都不会执行逻辑，因为<strong><code>sema.acquire</code>是一个阻塞方法</strong>，没有监听到信号量是会一直挂起等待。</p>
+<p><img src="https://moutsea-blog.oss-cn-hangzhou.aliyuncs.com/007S8ZIlgy1ggh3b57xvoj30ga03kdfq.jpg" alt=""></p>
+<p>当我们释放信号量之后，线程被启动，才开始了执行。我们每释放一个信号，则会多启动一个线程。这里面的逻辑应该不难理解。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>在并发场景当中，多线程的使用<strong>绝不是多启动几个线程做不同的任务</strong>而已，我们需要线程间协作，需要同步、获取它们的状态，这是非常不容易的。一不小心就会出现幽灵<code>bug</code>，时显时隐，这也是并发问题让人头疼的主要原因。</p>
+<p>这篇文章当中我们只是简单介绍了线程间通信的基本方法，针对这个问题，<strong>还有更好的解决方案</strong>。我们将在后续的文章当中继续讨论这个问题，敬请期待。</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" rel="tag"># 多线程</a>
+              <a href="/tags/%E5%A4%9A%E8%BF%9B%E7%A8%8B/" rel="tag"># 多进程</a>
+              <a href="/tags/%E5%B9%B6%E5%8F%91/" rel="tag"># 并发</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2023/04/18/multi-thread/" rel="prev" title="Python多线程与多进程入门">
+      <i class="fa fa-chevron-left"></i> Python多线程与多进程入门
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2023/04/18/multi-thread-2/" rel="next" title="Python中生产者、消费者模式">
+      Python中生产者、消费者模式 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="lv-container" data-id="city" data-uid="MTAyMC81ODEyOC8zNDU5MQ=="></div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%81%9C%E6%AD%A2%E7%BA%BF%E7%A8%8B"><span class="nav-number">1.</span> <span class="nav-text">停止线程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BA%BF%E7%A8%8B%E4%BF%A1%E5%8F%B7%E7%9A%84%E4%BC%A0%E9%80%92"><span class="nav-number">2.</span> <span class="nav-text">线程信号的传递</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BF%A1%E5%8F%B7%E9%87%8F"><span class="nav-number">3.</span> <span class="nav-text">信号量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">4.</span> <span class="nav-text">总结</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Ai领航员"
+      src="/images/ai.jpg">
+  <p class="site-author-name" itemprop="name">Ai领航员</p>
+  <div class="site-description" itemprop="description">人工智能从零入门教程</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">29</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">33</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/moutsea/ai_tutorial" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;moutsea&#x2F;ai_tutorial" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/suyuxuan94@qq.com" title="E-Mail → suyuxuan94@qq.com"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.zhihu.com/people/coderliangt" title="知乎 → https:&#x2F;&#x2F;www.zhihu.com&#x2F;people&#x2F;coderliangt" rel="noopener" target="_blank"><i class="fal fa-zhihu fa-fw"></i>知乎</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ai领航员</span>
+</div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="站点总字数">72k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">1:06</span>
+  </span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+        
+
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='0,0,255' opacity='0.5' zIndex='-1' count='99' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+  <script defer src="/lib/three/three.min.js"></script>
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script>
+NexT.utils.loadComments(document.querySelector('#lv-container'), () => {
+  window.livereOptions = {
+    refer: location.pathname.replace(CONFIG.root, '').replace('index.html', '')
+  };
+  (function(d, s) {
+    var j, e = d.getElementsByTagName(s)[0];
+    if (typeof LivereTower === 'function') { return; }
+    j = d.createElement(s);
+    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+    j.async = true;
+    e.parentNode.insertBefore(j, e);
+  })(document, 'script');
+});
+</script>
+
+</body>
+</html>

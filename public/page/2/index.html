@@ -1,0 +1,1777 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/l.svg">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/l.svg">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"www.ailinghang.club","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"livere","storage":true,"lazyload":false,"nav":null,"activeClass":"livere"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"manual","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="人工智能从零入门教程">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Ai领航员">
+<meta property="og:url" content="http://www.ailinghang.club/page/2/index.html">
+<meta property="og:site_name" content="Ai领航员">
+<meta property="og:description" content="人工智能从零入门教程">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:author" content="Ai领航员">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://www.ailinghang.club/page/2/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : true,
+    isPost : false,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Ai领航员</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+<!-- hexo injector head_end end --></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+    	<a target="_blank" rel="noopener" href="https://github.com/moutsea/ai_tutorial" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Ai领航员</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-planet">
+
+    <a href="/planet/" rel="section"><i class="fa fa-compass fa-fw"></i>知识星球</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content index posts-expand">
+            
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://www.ailinghang.club/2023/04/17/memory-mana/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/ai.jpg">
+      <meta itemprop="name" content="Ai领航员">
+      <meta itemprop="description" content="人工智能从零入门教程">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ai领航员">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/04/17/memory-mana/" class="post-title-link" itemprop="url">Python内存管理</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2023-04-17 08:40:52 / 修改时间：09:06:20" itemprop="dateCreated datePublished" datetime="2023-04-17T08:40:52+08:00">2023-04-17</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Python/" itemprop="url" rel="index"><span itemprop="name">Python</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>2.7k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>2 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>这篇文章我们来聊聊Python中内存管理机制，以及循环引用的问题。</p>
+<h2 id="Python的内存管理机制"><a href="#Python的内存管理机制" class="headerlink" title="Python的内存管理机制"></a>Python的内存管理机制</h2><p>对于工程师而言，<strong>内存管理机制非常重要</strong>，是绕不过去的一环。如果你是Java工程师，面试的时候一定会问JVM。C++工程师也一定会问内存泄漏，同样我们想要深入学习Python，内存管理机制也是绕不过去的一环。</p>
+<p>不过好在Python的内存管理机制相对来说比较简单，我们也不用特别深入其中的细节，简单做个了解即可。</p>
+<p>Python内存管理机制的核心就是引用计数，在Python当中一切都是对象，对象通过引用来使用。</p>
+<p><img src="https://moutsea-blog.oss-cn-hangzhou.aliyuncs.com/007S8ZIlgy1gezrwvc60ij30hi08874u.jpg" alt=""></p>
+<p>我们看到的是变量名，但是变量名指向了内存当中的一块对象。这种关系在Python当中称为<strong>引用</strong>，我们通过引用来操作对象。所以根据这点，引用计数很好理解，也就是说我们会对每一个对象进行统计所有指向它的指针的数量。如果一个对象引用计数为0，那么说明它没有任何引用指向它，也就是说它已经没有在使用了，这个时候，Python就会将这块内存收回。</p>
+<p>简单来说引用计数原理就是这些，但我们稍微深入一点，来简单看看哪些场景会引起对象引用的变化。</p>
+<p>引用计数的变化显然只有两种，一种是增加，一种是减少，这两种场景都只有4种情况。我们先来看下增加的情况：</p>
+<ol>
+<li>首先是初始化，最简单的就是我们用<strong>赋值操作</strong>给一个变量赋值。举个例子：</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">n = <span class="number">123</span></span><br></pre></td></tr></table></figure>
+<p>这就是最简单的初始化操作，虽然123在我们来看是一个常数，但是在Python底层同样被认为是一个<strong>常数对象</strong>。n是它的一个引用。</p>
+<ol>
+<li>第二种情况是引用的传递，最简单的就是我们将一个变量的值赋值给了另外一个变量。</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">m = n</span><br></pre></td></tr></table></figure>
+<p>比如我们将n赋值给m，它的本质是我们创建了一个新的引用，指向了同样一块内存。如果我们用id操作去查看m和n的id，会发现它们的id是一样的。也就是说它们并不是存储了两份相同的值，而是指向了同一份值。<strong>并不是有两个叫做王小二的人，而是王小二有两个不同的账号</strong>。</p>
+<ol>
+<li>第三种情况是作为元素被存储进了容器当中，比如被存储进了list当中。</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">a = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">123</span>]</span><br></pre></td></tr></table></figure>
+<p>虽然我们用到了一个容器，但是容器并不会拷贝一份这些对象，还是只是<strong>存储这些对象的引用</strong>。</p>
+<ol>
+<li>最后一种情况就是作为参数传给函数，在Python当中，所有的传参都是引用传递。这也是为什么，我们经常看到有人会这样写代码的原因：</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">test</span>(<span class="params">a</span>):</span><br><span class="line">  a.append(<span class="number">3</span>)</span><br><span class="line">  </span><br><span class="line">a = []</span><br><span class="line">test(a)</span><br><span class="line"><span class="built_in">print</span>(a)</span><br></pre></td></tr></table></figure>
+<p>我们根据上面列举的这四种引用计数增加的情况，不难推导出引用减少的情况， 其实基本上是<strong>对称的操作</strong>。</p>
+<ol>
+<li>和初始化对应的操作是<strong>销毁</strong>，比如我们创建的对象被del操作给销毁了，那么同样引用计数会-1</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">del</span> n</span><br></pre></td></tr></table></figure>
+<ol>
+<li>和赋值给其他变量名的操作相反的操作是<strong>覆盖</strong>，比如之前我们的<code>n=123</code>，也就是<code>n</code>这个变量指向<code>123</code>，现在我们将<code>n</code>赋值成其他值，那么<code>123</code>这个对象的引用计数同样会减少。</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">n = <span class="number">124</span></span><br></pre></td></tr></table></figure>
+<ol>
+<li>既然元素存储在容器当中会带来引用计数，那么同样元素<strong>从容器当中移除</strong>也会减少引用计数。这个也很好理解，最简单的就是<code>list</code>调用<code>remove</code>方法移除一个元素：</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">a.remove(<span class="number">123</span>)</span><br></pre></td></tr></table></figure>
+<ol>
+<li>最后一个对应的就是作用域，也就是当变量<strong>离开了作用域</strong>，那么它对应的内存块的引用计数同样会减少。比如我们函数调用结束，那么作为参数的这些变量对应的引用计数都会减1。</li>
+</ol>
+<p>如果一个对象的引用计数减到0，也就是没有引用再指向它的时候，那么当Python进行gc的时候，这块内存就会被释放，也就是这个对象会被清除，腾出空间来。</p>
+<p>注意一下，引用计数减到0与内存回收之间<strong>并不是立即发生的</strong>，而是有一段间隔的。根据Python的机制，内存回收只会在特定条件下执行。在占用内存比较小还有很多富裕的情况下，往往是不会执行内存回收的。因为Python在执行<code>gc（garbage collection）</code>的时候也会stop the world，也就是暂停其他所有的任务，所以这是影响性能的一件事情，只会在有必要的时候执行。</p>
+<p>我们费这么大劲来介绍Python中的内存机制，除了向大家科普一下这一块内容之外，更重要的一点是为了引出我们开发的时候经常遇见的一种情况——<strong>循环引用</strong>。</p>
+<h2 id="循环引用"><a href="#循环引用" class="headerlink" title="循环引用"></a>循环引用</h2><p>如果熟悉了Python的引用，来理解循环引用是非常容易的。说白了也很简单，就是你的一个变量引用我，我的一个变量引用你。</p>
+<p>我们来写一段简单的代码，来看看循环引用：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Test</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    a = Test()</span><br><span class="line">    b = Test()</span><br><span class="line">    a.t = b</span><br><span class="line">    b.t = a</span><br></pre></td></tr></table></figure>
+<p>如果你打个断点来看的话，会看到a和b之间的循环引用：</p>
+<p><img src="https://moutsea-blog.oss-cn-hangzhou.aliyuncs.com/007S8ZIlgy1gezrwx33tbj30ho05kmxh.jpg" alt=""></p>
+<p>这里是<strong>无限展开</strong>的，因为这是一个无限循环。无限循环并不会导致程序崩溃， 也不会带来太大的问题，它的问题只有一个，就是根据前面介绍的引用计数法，a和b的引用永远不可能为0。</p>
+<p>也就是说根据引用计数的原则，<strong>这两个变量永远不会被回收</strong>，这显然是不合理的。虽然Python当中专门建立了机制来解决引用循环的问题，但是我们并不知道它什么时候会被触发。</p>
+<p>这个问题在Python当中非常普遍，尤其在我们实现一些数据结构的时候。举个最简单的例子就是树中的节点，就是引用循环的。因为父节点会存储所有的孩子，往往孩子节点也会存储父节点的信息。那么这就构成了引用循环。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Node</span>:</span><br><span class="line">  <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, val, father</span>):</span><br><span class="line">    self.val = val</span><br><span class="line">    self.father = father</span><br><span class="line">    self.childs = []</span><br></pre></td></tr></table></figure>
+<h2 id="弱引用"><a href="#弱引用" class="headerlink" title="弱引用"></a>弱引用</h2><p>为了解决这个问题，Python中提供了一个叫做弱引用的概念。弱引用本质也是一种引用，但是它不会增加对象的引用计数。也就是说它不能保证它引用的对象一定不会被销毁，只要没有销毁，弱引用就可以返回预期的结果。</p>
+<p>弱引用不用我们自己开发，这是Python当中集成的一个现成的模块<strong>weakref</strong>。</p>
+<p>这个模块当中的方法很多，用法也很多，但是我们基本上用不到，一般来说最常用的就是<code>ref</code>方法。通过<code>weakref</code>库中的<code>ref</code>方法，可以返回对象的一个弱引用。我们还是来看个例子：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> weakref</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Test</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, name</span>):</span><br><span class="line">        self.name = name</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__str__</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="keyword">return</span> self.name</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    a = Test(<span class="string">&#x27;a&#x27;</span>)</span><br><span class="line">    b = Test(<span class="string">&#x27;b&#x27;</span>)</span><br><span class="line">    a.t = weakref.ref(b)</span><br><span class="line">    b.t = weakref.ref(a)</span><br><span class="line"></span><br><span class="line">    <span class="built_in">print</span>(a.t())</span><br></pre></td></tr></table></figure>
+<p>其实还是之前的代码，只是做了一点简单的改动。一个是我们给<code>Test</code>加上了<code>name</code>这个属性，以及<code>str</code>方法。另一个是我们把直接赋值改成了使用<code>weakref</code>。</p>
+<p>这一次我们再打断点进来看的话，就<strong>看不到无限循环的情况</strong>了：</p>
+<p><img src="https://moutsea-blog.oss-cn-hangzhou.aliyuncs.com/007S8ZIlgy1gezrww3zxqj30iz03xaa2.jpg" alt=""></p>
+<p><code>ref</code>返回的是一个获取引用对象的方法，而不是对象本身。所以我们想要获取这个对象的话，需要再把它当成函数调用一下。</p>
+<p>当然这样很麻烦，我们还有更好的办法，就是使用<strong><code>property</code>注解</strong>。通过<code>property</code>注解，我们可以把<code>weakref</code>封装掉，这样在使用的时候就没有感知了。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> weakref</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Test</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, name</span>):</span><br><span class="line">        self.name = name</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__str__</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="keyword">return</span> self.name</span><br><span class="line"></span><br><span class="line"><span class="meta">    @property</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">node</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">None</span> <span class="keyword">if</span> self._node <span class="keyword">is</span> <span class="literal">None</span> <span class="keyword">else</span> self._node()</span><br><span class="line"></span><br><span class="line"><span class="meta">    @node.setter</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">node</span>(<span class="params">self, node</span>):</span><br><span class="line">        self._node = weakref.ref(node)</span><br></pre></td></tr></table></figure>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>引用和循环引用都是基于Python本身的机制，如果对这块机制不了解，很容易采坑。因为可能会出现逻辑是对的，但是有一些意想不到的bug的情况。这种时候，往往很难通过review代码或者是测试发现，这也是我们学习的瓶颈所在。很容易发现代码已经写得很熟练了，但是一些进阶的代码还是看不懂或者是写不出来，本质上就是因为缺少了对于底层的了解和认知。</p>
+<p>循环引用的问题在我们开发代码的时候还蛮常见的，尤其是涉及到<strong>树和图的数据结构</strong>的时候。由于循环引用的关系，很有可能出现被删除的树仍然占用着空间，内存不足的情况发生。这个时候使用weakref就很有必要了。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://www.ailinghang.club/2023/04/17/python-dynamic-class/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/ai.jpg">
+      <meta itemprop="name" content="Ai领航员">
+      <meta itemprop="description" content="人工智能从零入门教程">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ai领航员">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/04/17/python-dynamic-class/" class="post-title-link" itemprop="url">Python 通过type动态创建类</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2023-04-17 08:35:36 / 修改时间：08:39:42" itemprop="dateCreated datePublished" datetime="2023-04-17T08:35:36+08:00">2023-04-17</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Python/" itemprop="url" rel="index"><span itemprop="name">Python</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>1.9k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>2 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>今天我们来聊聊Python当中的元类。</p>
+<p>元类是Python当中的<strong>高级用法</strong>，如果你之前从来没见过这个术语或者是没听说过这个概念，这是非常正常的，因为一方面它的<strong>使用频率不高</strong>，另外一方面就是它相对<strong>不太容易理解</strong>。以至于很多Python开发者都理解得不是很深入，导致了市面上相关的资料也并不太多。我也是读了一些大牛的代码才开启了这扇新世界的大门。</p>
+<h2 id="一切都是对象"><a href="#一切都是对象" class="headerlink" title="一切都是对象"></a>一切都是对象</h2><p>我们之前的时候曾经介绍过，在Python当中<strong>一切都是对象</strong>，注意，是一切都是对象。我们都知道对象是类实例化之后的结果，可以简单地将类和对象类比成模具和成品的关系。模具是类，而根据模具做出来的产品是对象。</p>
+<p>这个比喻思想比较接近，但是不完美。因为实际当中一个模具可以做出多个产品，一个产品只有一个模具。但编程语言当中不同，由于类之间可以继承以及<strong>多继承</strong>，也就是说一个对象可以对应多个类。所以这个比喻不是特别合适，但是类和对象的关系是没错的。</p>
+<p>但是这就有了一个问题，既然Python当中一切都是对象，那么是不是说类其实也是一个对象呢？也就是说一个模具其实也是另外一个模具的产品？同样，这个模具的模具其实也是另外一个模具的产品，那么我们一直追问下去会怎么样呢？</p>
+<p>很简单，我们做个实验就知道了，我们可以用<code>__class__</code>关键字来查看一个变量的类型，那么我们反复调用就可以查看其中的关系了：</p>
+<p><img src="https://moutsea-blog.oss-cn-hangzhou.aliyuncs.com/007S8ZIlgy1gfdoybc1fmj30sa0cujs8.jpg" alt=""></p>
+<p>从上面的图中我们可以发现，<code>num</code>是<code>int</code>类型的变量。我们继续查看<code>int</code>这个类型的类型，<strong>得到了<code>type</code>类型</strong>。而当我们去查看<code>type</code>的类型的时候，会发现我们得到的还是一个<code>type</code>的类型。</p>
+<p>所以我们可以明白了，<code>type</code>是Python中用来创建所有类的元类，是所有模具的模具。在Python当中，我们把一个类的类叫做元类（<code>metaclass</code>）。所以<code>type</code>就是Python当中内置的元类，我们也可以自己创建我们需要的元类。通过元类，我们创建的对象也是一个类，而不是一个实例。</p>
+<h2 id="动态创建类"><a href="#动态创建类" class="headerlink" title="动态创建类"></a>动态创建类</h2><p>理解了type是一切类基础之后，再来看动态类就简单了。<strong>动态类是动态语言最大的特性之一</strong>，作为典型的动态语言，Python自然也是支持类型的动态创建的。</p>
+<p>在Python当中，创建动态类型的一种方式就是通过<code>type</code>关键字。说起来有些意想不到，<code>type</code>函数不是用来查询对象所属的类型的吗，怎么还可以创建类呢？</p>
+<p>这其实是<code>type</code>的<strong>另外一种用法</strong>，作为元类来创建一个类。在这种用法，<code>type</code>函数接收3个参数，分别是类型的名称，父类的元组，以及一个字典。除了第一个参数之外，后面两个参数都可以为空。比如我们来看一个例子：</p>
+<p><img src="https://moutsea-blog.oss-cn-hangzhou.aliyuncs.com/007S8ZIlgy1gfdoyavkiqj30sa05s3yq.jpg" alt=""></p>
+<p>注意，<code>type</code>返回的结果是一个类，而不是一个实例。所以我们还可以通过它创建实例：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hello = Hello()</span><br></pre></td></tr></table></figure>
+<p>这样创建出来的是最简单的空类，它什么也没有，和下面的代码等价。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Hello</span>:</span><br><span class="line">    <span class="keyword">pass</span></span><br></pre></td></tr></table></figure>
+<p>我们也可以在type的参数当中为这个类填充属性和方法：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">hello_world</span>(<span class="params">self</span>):</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;hello&#x27;</span>)</span><br><span class="line">    </span><br><span class="line">Hello = <span class="built_in">type</span>(<span class="string">&#x27;Hello&#x27;</span>, (), &#123;<span class="string">&#x27;hello&#x27;</span>:hello_world, <span class="string">&#x27;num&#x27;</span>: <span class="number">3</span>&#125;)</span><br></pre></td></tr></table></figure>
+<p>这样我们就为<code>Hello</code>这个类创建了一个方法叫做<code>hello</code>，一个属性<code>num</code>等于3。我们可以来调用一下试试：</p>
+<p><img src="https://moutsea-blog.oss-cn-hangzhou.aliyuncs.com/007S8ZIlgy1gfdoya9tqnj30to070aa8.jpg" alt=""></p>
+<p>也就是说我们可以使用type来根据我们的需要自行定义类，只不过type既可以获取对象的类型又可以创建新的类，<strong>看起来可能觉得有些不太直观</strong>，但是其实这也是说得通的。我们在Python当中通过调用<code>str</code>创建一个<code>string</code>对象，通过<code>int</code>来创建一个<code>integer</code>对象，那么通过<code>type</code>则是创建一个类的对象。</p>
+<h2 id="实现继承"><a href="#实现继承" class="headerlink" title="实现继承"></a>实现继承</h2><p>我们之前说了，当我们使用<code>type</code>来创建类的时候，还可以传入父类的元组从而实现类的继承。</p>
+<p>比如我们再创建一个叫做<code>World</code>的类继承刚才通过<code>type</code>创建出来的<code>Hello</code>类，然后在为它加上额外的函数：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">say_world</span>(<span class="params">self</span>):</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;World&#x27;</span>)</span><br><span class="line">    </span><br><span class="line">World = <span class="built_in">type</span>(<span class="string">&#x27;World&#x27;</span>, (Hello, ), &#123;<span class="string">&#x27;world&#x27;</span>: say_world&#125;)</span><br></pre></td></tr></table></figure>
+<p>注意这里传入第二个参数是<strong>父类的元组</strong>，既然是元组，那么当元素只有一个的时候，需要加上逗号，表示这是一个元组。这样创建出来的类和我们通过class定义的静态类效果是一样的：</p>
+<p><img src="https://moutsea-blog.oss-cn-hangzhou.aliyuncs.com/007S8ZIlgy1gfdoycdt44j30vu06c74g.jpg" alt=""></p>
+<p>也就是说，我们可以先把函数实现，然后再根据任务的需要把这些函数组装成新的类。显然，这和传统的C++以及Java这些静态类型的语言相比，要灵活得多。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>我们固然可以通过<code>type</code>来创建动态创建类，但是从上面的使用过程也应该看得出来，这样使用起来并不太方便，并且<strong>很多进阶的功能很难实现</strong>。举个简单的例子，比如我们想要动态地为一个已有的类添加一些动态的方法，生成新的类。我们使用<code>type</code>就很难实现。<code>type</code>也的确不是Python元类的主要运用，<code>metaclass</code>才是王道，但由于篇幅限制，这部分将放在下一篇文章当中。</p>
+<p>当然，元类是一个非常高级的用法，以至于Python的创始人说<strong>99%的Python程序员并不需要用到它</strong>。所以如果你觉得理解起来非常费劲的话也没有关系，知道这么个概念就可以了。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://www.ailinghang.club/2023/04/17/python-decro-pro/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/ai.jpg">
+      <meta itemprop="name" content="Ai领航员">
+      <meta itemprop="description" content="人工智能从零入门教程">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ai领航员">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/04/17/python-decro-pro/" class="post-title-link" itemprop="url">Python装饰器进阶</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2023-04-17 08:23:15 / 修改时间：08:34:07" itemprop="dateCreated datePublished" datetime="2023-04-17T08:23:15+08:00">2023-04-17</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Python/" itemprop="url" rel="index"><span itemprop="name">Python</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>2.5k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>2 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>上一篇文章当中我们介绍了Python装饰器的定义和基本的用法，这篇文章我们一起来学习一下Python装饰器的一些进阶使用方法。对装饰器不太熟悉，可以回顾一下上一篇文章。</p>
+<p>之前的文章当中我们从前到后仔细推到了一下装饰器的本质和用途，也学会了它的基本用法，已经足够<strong>应付80%的场景</strong>了。但是总有20%的场景使用基本的方法解决不了，这个时候就需要我们学习更多、更全的其他用法。</p>
+<p>比如我想要<strong>通过一个参数控制装饰器的功能</strong>，这个问题其实很常见。就拿记录时间来说，我们都知道时间可以记录成很多种格式，比如可以记成<code>2020-05-04</code>也可以记录成<code>20200504</code>，还可以记录成<code>04/05/2020</code>，如果是后端还会记录时间的时间戳。比如说我们现在实现了一个记录日志的装饰器，用来给我们的方法打上日志，现在我们想要控制记录日志的时候打印出来的时间格式，这个需求使用最简单的装饰器就没有办法解决了。</p>
+<p>这个时候，如果想要解决问题，就必须引入参数，也就是说我们必须要在装饰器当中加入参数才行。但问题来了，这个参数怎么加，加在哪里呢？</p>
+<h2 id="定义装饰器参数"><a href="#定义装饰器参数" class="headerlink" title="定义装饰器参数"></a>定义装饰器参数</h2><p>在我们介绍具体的用法之前，我们先来回顾一下装饰器的代码：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">mydec</span>(<span class="params">func</span>):</span><br><span class="line"><span class="meta">    @wraps(<span class="params">func</span>)</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">mywrap</span>(<span class="params">*args, **kw</span>):</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;hello this is decorator1&#x27;</span>)</span><br><span class="line">        func(*args, **kw)</span><br><span class="line">    <span class="keyword">return</span> mywrap</span><br><span class="line">    </span><br><span class="line"><span class="meta">@mydec</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">helloWorld</span>():</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;hello, world&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<p>这个就是我们上次讲的最简单的那种装饰器，假如说我们这个时候希望传入一个参数type，可以控制装饰器的输出结果。就像这样：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@mydec(<span class="params">type_=<span class="string">&#x27;test&#x27;</span></span>)</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">helloWorld</span>():</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;hello, world&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<p>我们可能会想是不是应该在mydec这个方法的参数里面加上一个type_，但是如果你试一下就好发现这样是不行的，会得到一个error：</p>
+<p><img src="https://moutsea-blog.oss-cn-hangzhou.aliyuncs.com/007S8ZIlgy1gegpjq8jryj313808gdhf.jpg" alt=""></p>
+<p>Error错误的字面意思很好理解，但是原因却令人费解。这个Error是说函数<code>mydec</code><strong>少了一个必选参数func</strong>，这个<code>func</code>就是我们要包装的函数，但是这个不是自动传入的吗，怎么会提示我们少了这个参数呢？</p>
+<p>如果这个问题的本质不能理解的话，那么装饰器就很难大成了，因为只有理解清楚了这一点，才能理解后面装饰器各种稀奇古怪的进阶用法。但是很坑爹的是，很多资料当中都只是简单地介绍了怎么用，很少会探究其中背后的原因，这会让初学者在学习的时候陷入费解。我在学习的时候也花了很多心思，才终于搞明白，说穿了很简单，但是想通不容易。</p>
+<p>其实这样会报错的主要原因是注解当中有参数和没有参数的装饰器是完全不同的。</p>
+<p>我们来回顾一下不加参数的装饰器的用法，比如：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@mydec</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">hello_world</span>():</span><br><span class="line">    <span class="keyword">pass</span></span><br></pre></td></tr></table></figure>
+<p>我们执行hello_world()的时候，等价于执行<code>mydec(hello\_world)()</code>。看明白了吗，我们把这行代码展开，它其实是下面这两行代码共同执行的结果：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cur = mydec(hello_world)</span><br><span class="line">cur()</span><br></pre></td></tr></table></figure>
+<p>如果<code>hello_world</code>这个函数带上参数呢？</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@mydec</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">hello_world</span>(<span class="params">*args, **kw</span>):</span><br><span class="line">    <span class="keyword">pass</span></span><br></pre></td></tr></table></figure>
+<p>那么执行的时候它其实是这样的：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cur = mydec(hello_world)</span><br><span class="line">cur(*args, **kw)</span><br></pre></td></tr></table></figure>
+<p>这个理解了之后，我们继续往下，现在我们想要将一个参数传给装饰器，按照我们的想法下面这两段代码应该是一样的。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@mydec(<span class="params">type_=<span class="string">&#x27;test&#x27;</span></span>)</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">helloWorld</span>():</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;hello, world&#x27;</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">cur = mydec(hello_world, type_)</span><br><span class="line">cur()</span><br></pre></td></tr></table></figure>
+<p>但是很遗憾的是，Python解释器当中并不是这么设计的。它对加上了参数的装饰器<strong>多做了一层封装</strong>，也就是说上面传入参数的<code>hello_world</code>函数执行的时候等价于下面这段代码：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cur1 = mydec(type_)</span><br><span class="line">cur2 = cur1(hello_world)</span><br><span class="line">cur2()</span><br></pre></td></tr></table></figure>
+<p>正是因为额外多封装了一层，所以函数和装饰器的参数传入装饰器的顺序是不同的，顺序也是不一样的。明白了这点之后就简单很多了，既然Python解释器在解释装饰器参数的时候多增加了一层，那么如果我们想要实现带参数的装饰器，只需要也在装饰器当中多封装一层就可以了。比如可以写成这样：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">mydec</span>(<span class="params">type_=<span class="literal">None</span></span>):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">decorate</span>(<span class="params">func</span>):</span><br><span class="line"><span class="meta">        @wraps(<span class="params">func</span>)</span></span><br><span class="line">        <span class="keyword">def</span> <span class="title function_">mywrap</span>():</span><br><span class="line">            <span class="keyword">if</span> type_ <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">None</span>:</span><br><span class="line">                <span class="built_in">print</span>(type_)</span><br><span class="line">            func()</span><br><span class="line">        <span class="keyword">return</span> mywrap</span><br><span class="line">    <span class="keyword">return</span> decorate</span><br></pre></td></tr></table></figure>
+<p>这样我们再执行就可以了：</p>
+<p><img src="https://moutsea-blog.oss-cn-hangzhou.aliyuncs.com/007S8ZIlgy1gegplhtdsej30uo07sjrz.jpg" alt=""></p>
+<h2 id="默认参数怎么办"><a href="#默认参数怎么办" class="headerlink" title="默认参数怎么办"></a>默认参数怎么办</h2><p>到这里看似一切都很完美，但其实<strong>有一个很大的问题</strong>被我们忽略了。</p>
+<p>这个问题就是默认参数问题，在前面我们定义装饰器的时候，将<code>type_</code>这个参数设置成了可选的。这也很符合我们实际情况，如非必要，参数能省略就省略。但是这就导致了一个问题，对于不用加上参数的装饰器，有些人习惯写成<code>mydec()</code>，有些人习惯写成<code>mydec</code>。如果我们试一下<code>mydec</code>，就会发现这样写会报错：</p>
+<p><img src="https://moutsea-blog.oss-cn-hangzhou.aliyuncs.com/007S8ZIlgy1gegplrsfozj313206qq47.jpg" alt=""></p>
+<p>这个报错和上面的报错一模一样，出现的原因也是一样的，都是少了<code>func</code>参数。但是很奇怪啊，为什么会少了<code>func</code>呢？</p>
+<p>原因很简单，因为我们把括号去掉，装饰器又回到了之前的两层结构！</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cur = mydec(hello_world)</span><br><span class="line">cur(*args, **kw)</span><br></pre></td></tr></table></figure>
+<p>这就很坑爹了，我们装饰器的结构肯定是不能改变的，如果使用两层结构就没办法传入参数了，但是如果不传参的时候怎么办，难道就只能强制程序员统一风格全部加上括号吗？这当然也是一个办法，那还有没有更好的办法呢？有没有办法统一这两种逻辑呢？</p>
+<p>当然是有的，为了解决这个问题，我们需要用到一个新的工具，叫做<strong>偏函数</strong>。</p>
+<p>偏函数很好理解，它本意也是一个高阶函数，其实就是<strong>闭包</strong>。偏函数的使用场景针对多参数的函数，通过使用偏函数，可以固定若干个参数的传值，从而起到简化函数传参的作用。我们来看一个例子，我们创建一个pow函数，用来计算x的n次方：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> math</span><br><span class="line"><span class="keyword">def</span> <span class="title function_">pow</span>(<span class="params">x, n</span>):</span><br><span class="line">    <span class="keyword">return</span> math.<span class="built_in">pow</span>(x, n)</span><br></pre></td></tr></table></figure>
+<p>这个函数需要传入x和n两个参数，如果我们当前只需要计算平方，我们可以使用闭包，<strong>固定其中的参数n</strong>，生成一个新的函数来做到这点。比如：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">mypow</span>(<span class="params">n</span>):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">func</span>(<span class="params">x</span>):</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">pow</span>(x, n) </span><br><span class="line">    <span class="keyword">return</span> func</span><br></pre></td></tr></table></figure>
+<p><img src="https://moutsea-blog.oss-cn-hangzhou.aliyuncs.com/007S8ZIlgy1gegpqwiym0j30os04caa9.jpg" alt=""></p>
+<p>偏函数的本质就是这样一个闭包，只不过它简化了我们的代码而已：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> functools <span class="keyword">import</span> partial</span><br><span class="line"></span><br><span class="line">pow2 = partial(<span class="built_in">pow</span>, n=<span class="number">2</span>)</span><br><span class="line">pow2(<span class="number">6</span>)</span><br></pre></td></tr></table></figure>
+<p>使用偏函数我们只需要传入待加工的原函数，以及固定的参数值即可。我们把偏函数用在装饰器当中，就可以解决刚才的问题。回忆一下，不带参数的装饰器是两层函数嵌套，而带上参数的是三层嵌套。那么我们使用<code>partial</code>，专门为带上参数的情况额外增加一层嵌套即可：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">mydec</span>(<span class="params">func=<span class="literal">None</span>, type_=<span class="literal">None</span></span>):</span><br><span class="line">    <span class="comment"># 不带参数的话，func会是None，这时候我们固定参数即可</span></span><br><span class="line">    <span class="keyword">if</span> func <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">        <span class="keyword">return</span> partial(mydec, type_=type_)</span><br><span class="line">    </span><br><span class="line"><span class="meta">    @wraps(<span class="params">func</span>)</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">mywrap</span>():</span><br><span class="line">        <span class="keyword">if</span> type_ <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">None</span>:</span><br><span class="line">            <span class="built_in">print</span>(type_)</span><br><span class="line">        func()</span><br><span class="line">    <span class="keyword">return</span> mywrap</span><br></pre></td></tr></table></figure>
+<p>我们来看下这其中的细节，当我们不传入参数的时候，我们其实执行的是<code>cur = mydec(func)</code>，这个时候<code>func</code>不为空，那么不会触发<code>if</code>中的语句，所以会直接返回<code>mywrap</code>。如果传入参数，这时候<code>func</code>是<code>None</code>，会触发<code>if</code>中的<code>partial</code>。注意这里我们在<strong>partial当中传入的函数依然是mydec</strong>，也就是说我们固定了type_这个参数，调用的话依然返回的是<code>mywrap</code>，相当于我们通过<code>partial</code>额外在两层结构当中专门为带参数的情况增加了一层，统一了逻辑。</p>
+<h2 id="结尾"><a href="#结尾" class="headerlink" title="结尾"></a>结尾</h2><p>今天的概念比之前的装饰器要复杂很多，<strong>一时可能并不好理解</strong>，其实这是非常正常的。这不仅仅是装饰器的问题，也不仅是Python的问题，归根结底这是函数式编程的特性导致的。函数式编程的优点就是高度灵活，使用非常方便，但缺点也很明显，<strong>代码难以维护，阅读难度高，理解起来也不简单</strong>。典型的初学简单，精深非常难的典型。所以如果大家觉得一时理解不了，这并不是你们的问题，一方面我们需要培养自己函数传编程的思维，另一方面我们也需要熟悉Python中装饰器的使用方法。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://www.ailinghang.club/2023/04/16/python-decro/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/ai.jpg">
+      <meta itemprop="name" content="Ai领航员">
+      <meta itemprop="description" content="人工智能从零入门教程">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ai领航员">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/04/16/python-decro/" class="post-title-link" itemprop="url">Python装饰器入门</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2023-04-16 23:25:12" itemprop="dateCreated datePublished" datetime="2023-04-16T23:25:12+08:00">2023-04-16</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-04-17 08:20:27" itemprop="dateModified" datetime="2023-04-17T08:20:27+08:00">2023-04-17</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Python/" itemprop="url" rel="index"><span itemprop="name">Python</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>2.4k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>2 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>今天这篇文章我们来聊聊Python中一个高端技巧——装饰器。</p>
+<h2 id="装饰器本质"><a href="#装饰器本质" class="headerlink" title="装饰器本质"></a>装饰器本质</h2><p>装饰器在很多面试中出镜率很高，当初我也被问过，但很遗憾当初水平太次没能答出来。如今如果再有面试官问我Python中的装饰器是什么，我一句话就能给回答了，倒不是我装逼，实际上也的确只需要一句话。Python中的装饰器，本质上就是一个<strong>高阶函数</strong>。</p>
+<p>你可能不太清楚高阶函数的定义，没关系，我们可以类比一下。在数学当中高阶导数，比如二次导数，表示导数的导数。那么这里高阶函数自然就是<strong>函数的函数</strong>，结合我们之前介绍过的函数式编程，也就是说是一个返回值是函数的函数。但是这个定义是充分不必要的，也就是说装饰器是高阶函数，但是<strong>高阶函数并不都是装饰器</strong>。装饰器是高阶函数一种特殊的用法。</p>
+<h3 id="任意参数"><a href="#任意参数" class="headerlink" title="任意参数"></a>任意参数</h3><p>在介绍装饰器的具体使用之前，我们先来了解和熟悉一下Python当中的任意参数。</p>
+<p>Python当中支持任意参数，它写成<code>*args, **kw</code>。表示的含义是接受任何形式的参数。</p>
+<p>举个例子，比如我们定义一个函数：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">exp</span>(<span class="params">a, b, c=<span class="string">&#x27;3&#x27;</span>, d=<span class="string">&#x27;f&#x27;</span></span>):</span><br><span class="line">    <span class="built_in">print</span>(a, b, c, d)</span><br></pre></td></tr></table></figure>
+<p>我们可以这样调用：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">args = [<span class="number">1</span>, <span class="number">3</span>]</span><br><span class="line">dt = &#123;<span class="string">&#x27;c&#x27;</span>: <span class="number">4</span>, <span class="string">&#x27;d&#x27;</span>: <span class="number">5</span>&#125;</span><br><span class="line"></span><br><span class="line">exp(*args, **dt)</span><br></pre></td></tr></table></figure>
+<p>最后输出的结果是1， 3， 4， 5。也就是说我们用一个<strong>list和dict可以表示任何参数</strong>。因为Python当中规定必选参数一定写在可选参数的前面，而必选参数是可以不用加上名称标识的，也就是可以不用写a=1，直接传入1即可。那么这些没有名称标识的<strong>必选参数就可以用一个list来表示</strong>，而可选参数是必须要加上名称标识的，这些参数可以用<code>dict</code>来表示，这两者相加可以表示任何形式的参数。</p>
+<p>注意我们传入<code>list</code>和<code>dict</code>的时候前面加上了<code>*</code>和<code>**</code>，它表示<strong>将list和dict当中的所有值展开</strong>。如果不加的话，<code>list</code>和<code>dict</code>会被当成是整体传入。</p>
+<p>所以如果一个函数写成这样，它表示可以接受任何形式的参数。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">exp</span>(<span class="params">*args, **kw</span>):</span><br><span class="line">    <span class="keyword">pass</span></span><br></pre></td></tr></table></figure>
+<h3 id=""><a href="#" class="headerlink" title=" "></a> </h3><h3 id="定义装饰器"><a href="#定义装饰器" class="headerlink" title="定义装饰器"></a>定义装饰器</h3><p>明白了任意参数的写法之后，装饰器就不难了。</p>
+<p>既然我们可以用<code>*args, **kw</code>接受任何参数。并且Python当中支持一个函数作为参数传入另外一个函数，如果我们把函数和这个函数的所有参数全部传入另外一个函数，那么不就可以<strong>实现代理</strong>了吗？</p>
+<p>还是刚才的例子，我们额外增加一个函数：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">exp</span>(<span class="params">a, b, c=<span class="string">&#x27;3&#x27;</span>, d=<span class="string">&#x27;f&#x27;</span></span>):</span><br><span class="line">    <span class="built_in">print</span>(a, b, c, d)</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">agent</span>(<span class="params">func, *args, **kwargs</span>):</span><br><span class="line">    func(*args, **kwargs)</span><br><span class="line"></span><br><span class="line">args = [<span class="number">1</span>]</span><br><span class="line">dt = &#123;<span class="string">&#x27;b&#x27;</span>: <span class="number">1</span>, <span class="string">&#x27;c&#x27;</span>: <span class="number">4</span>, <span class="string">&#x27;d&#x27;</span>: <span class="number">5</span>&#125;</span><br><span class="line"></span><br><span class="line">agent(exp, *args, **dt)</span><br></pre></td></tr></table></figure>
+<p><strong>装饰器的本质其实就是这样一个agent的函数</strong>，但是如果使用的时候需要手动传入会非常麻烦，使用起来不太方便。所以Python当中提供了特定的库，我们可以让装饰器以注解的方式使用，大大简化操作：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> functools <span class="keyword">import</span> wraps</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">wrapexp</span>(<span class="params">func</span>):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">wrapper</span>(<span class="params">*args, **kwargs</span>):</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;this is a wrapper&#x27;</span>)</span><br><span class="line">        func(*args, **kwargs)</span><br><span class="line">    <span class="keyword">return</span> wrapper</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">@wrapexp</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">exp</span>(<span class="params">a, b, c=<span class="string">&#x27;3&#x27;</span>, d=<span class="string">&#x27;f&#x27;</span></span>):</span><br><span class="line">    <span class="built_in">print</span>(a, b, c, d)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">args = [<span class="number">1</span>, <span class="number">3</span>]</span><br><span class="line">dt = &#123;<span class="string">&#x27;c&#x27;</span>: <span class="number">4</span>, <span class="string">&#x27;d&#x27;</span>: <span class="number">5</span>&#125;</span><br><span class="line"></span><br><span class="line">exp(*args, **dt)</span><br></pre></td></tr></table></figure>
+<p>在这个例子当中，我们定义了一个<code>wrapexp</code>的装饰器。我们在其中的<code>wrapper</code>方法当中实现了装饰器的逻辑<strong>，<code>wrapexp</code>当中传入的参数<code>func</code>是一个函数，<code>wrapper</code>当中的参数则是<code>func</code>的参数。所以我们在<code>wrapper</code>当中调用`func(*args, </strong>kw)`，就是调用打上了这个注解的函数本身。比如在这个例子当中，我们没有做任何事情，只是在原样调用之前多输出了一行’<strong>this is a wrapper</strong>‘，表示我们的装饰器调用成功了。</p>
+<h2 id="装饰器用途"><a href="#装饰器用途" class="headerlink" title="装饰器用途"></a>装饰器用途</h2><p>我们理解了装饰器的基本使用方法之后，自然而然地会问一个天然的问题，学会了它<strong>究竟有什么用</strong>呢？</p>
+<p>如果你从上面的例子当中没有领会到装饰器的强大，不如让我用一个例子再来暗示一下。比如说你是一个程序员，辛辛苦苦做出了一个功能，写了好几千行代码，<strong>上百个函数</strong>，终于通过了审核上线了。这个时候，你的产品经理找到了你说，经过分析我们发现上线的功能运行速度不达标，经常有请求超时，你能不能计算一下<strong>每个函数运行的耗时</strong>，方便我们找到需要优化的地方？</p>
+<p>这是一个非常合理的请求，但想想看你写了上百个函数，如果每一个函数都要手动添加时间计算，这要写多少代码？万一哪个函数不小心改错了，你又得一一检查，并且如果要求严格的话你还得为每一个函数专门写一个单元测试……</p>
+<p>我想，正常的程序员应该都会抗拒这个需求。</p>
+<p>但是有了装饰器就很简单了，我们可以实现一个计算函数耗时的装饰器，然后我们只需要给每一个函数<strong>加上注解</strong>就好了。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> time</span><br><span class="line"><span class="keyword">from</span> functools <span class="keyword">import</span> wraps</span><br><span class="line"><span class="keyword">def</span> <span class="title function_">timethis</span>(<span class="params">func</span>):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">wrapper</span>(<span class="params">*args, **kwargs</span>):</span><br><span class="line">        start = time.time()</span><br><span class="line">        result = func(*args, **kwargs)</span><br><span class="line">        end = time.time()</span><br><span class="line">        <span class="built_in">print</span>(func.__name__, end-start)</span><br><span class="line">        <span class="keyword">return</span> result</span><br><span class="line">    <span class="keyword">return</span> wrapper</span><br></pre></td></tr></table></figure>
+<p>这也是装饰器最大的用途，可以<strong>在不修改函数内部代码的前提下，为它包装一些额外的功能</strong>。</p>
+<h2 id="元信息"><a href="#元信息" class="headerlink" title="元信息"></a>元信息</h2><p>我们之前说过装饰器的本质是高阶函数，所以我们也可以和高阶函数一样来调用装饰器，比如下面这样：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">exp</span>(<span class="params">a, b, c=<span class="string">&#x27;3&#x27;</span>, d=<span class="string">&#x27;f&#x27;</span></span>):</span><br><span class="line">    <span class="built_in">print</span>(a, b, c, d)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">args = [<span class="number">1</span>, <span class="number">3</span>]</span><br><span class="line">dt = &#123;<span class="string">&#x27;c&#x27;</span>: <span class="number">4</span>, <span class="string">&#x27;d&#x27;</span>: <span class="number">5</span>&#125;</span><br><span class="line"></span><br><span class="line">f = wrapexp(exp)</span><br><span class="line">f(*args, **dt)</span><br></pre></td></tr></table></figure>
+<p>这样的方式得到的结果和使用注解是一样的，也就是说我们加上注解的本质其实就是调用装饰器返回一个新的函数。</p>
+<p>既然和高阶函数是一样的，那么就带来了一个问题，<strong>我们使用的其实已经不再是原函数了</strong>，而是一个由装饰器返回的新函数，虽然这个函数的功能和原函数一样，但是一些基础的信息其实已经丢失了。</p>
+<p>比如我们可以打印出函数的name来做个实验：</p>
+<p><img src="https://moutsea-blog.oss-cn-hangzhou.aliyuncs.com/image-20230417081914252.png" alt=""></p>
+<p>正常的函数调用<strong>name</strong>返回的都是函数的名称，但是当我们加上了装饰器的注解之后，就会发生变化，同样，我们输出加上了装饰器注解之后的结果：</p>
+<p><img src="https://moutsea-blog.oss-cn-hangzhou.aliyuncs.com/image-20230417081945161.png" alt=""></p>
+<p>我们会发现输出的结果变成了wrapper，这是因为我们实现的装饰器内部的函数叫做wrapper。不仅仅是<strong>name</strong>，函数内部还有很多其他的基本信息，比如记录函数内描述的<strong>doc</strong>，<strong>annotations</strong>等等，这些基本信息被称为是<strong>元信息</strong>，这些元信息由于我们使用注解发生了丢失。</p>
+<p>有没有什么办法可以保留这些函数的元信息呢？</p>
+<p>其实很简单，Python当中为我们提供了一个专门的装饰器器用来保留函数的元信息，我们只需要在实现装饰器的wrapper函数当中<strong>加上一个注解wraps</strong>即可。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">wrapexp</span>(<span class="params">func</span>):</span><br><span class="line"><span class="meta">    @wraps(<span class="params">func</span>)</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">wrapper</span>(<span class="params">*args, **kwargs</span>):</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;this is a wrapper&#x27;</span>)</span><br><span class="line">        func(*args, **kwargs)</span><br><span class="line">    <span class="keyword">return</span> wrapper</span><br></pre></td></tr></table></figure>
+<p>加上了这个注解之后，我们再来检查函数的元信息，会发现它和我们预期一致了。</p>
+<p><img src="https://moutsea-blog.oss-cn-hangzhou.aliyuncs.com/image-20230417082002185.png" alt=""></p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>了解了Python中的装饰器之后，再来看之前我们用过的<code>@property, @staticmethod</code>等注解，想必都能明白，<strong>它们背后的实现其实也是装饰器</strong>。灵活使用装饰器可以大大简化我们的代码， 让我们的代码更加规范简洁，还能灵活地实现一些特殊的功能。</p>
+<p>装饰器的用法很多，今天介绍的只是其中最基本的，在后续的文章当中，还会继续和大家分享它更多其他的用法。在文章开始的时候我也说了，装饰器是<strong>Python进阶必学的技能之一</strong>。想要熟练掌握这门语言，灵活运用，看懂大佬的源码，装饰器是必须会的东西。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://www.ailinghang.club/2023/04/16/python-stand/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/ai.jpg">
+      <meta itemprop="name" content="Ai领航员">
+      <meta itemprop="description" content="人工智能从零入门教程">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ai领航员">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/04/16/python-stand/" class="post-title-link" itemprop="url">Python面向对象常用规范</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2023-04-16 11:29:09 / 修改时间：11:35:23" itemprop="dateCreated datePublished" datetime="2023-04-16T11:29:09+08:00">2023-04-16</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Python/" itemprop="url" rel="index"><span itemprop="name">Python</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>2.8k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>3 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>我们来聊聊面向对象的一些进阶使用。</p>
+<h2 id="slots"><a href="#slots" class="headerlink" title="__slots__"></a>__slots__</h2><p>如果你看过github当中一些大牛的代码，你会发现很多大牛经常在类的顶部加上<code>__slots__</code>关键字。如果你足够好奇，你可能会试着把这个关键字去掉再运行试试，你会发现去掉了之后什么也没有发生，一切依然运行得很好。</p>
+<p>那么这个<code>__slots__</code>关键字究竟是做什么的呢？</p>
+<p>它主要有两个功能，我们先来说第一个功能，就是<strong>限制用户的使用</strong>。</p>
+<p>我们都知道Python是一门非常灵活的<strong>动态语言</strong>，很多在其他语言看起来完全不能容忍的事情在Python当中是可行的，这也是Python的设计理念，为了灵活和代码方便牺牲了效率。比如我们来看一个很简单的例子，由于Python是动态语言，所以类的成员甚至可以在类创建好了之后动态创建。这在静态语言当中是绝对不行的，我们只能调用类当中已有的属性，是<strong>不能或者很难</strong>添加新属性的。</p>
+<p>比如这段代码：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Exp</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self</span>):</span><br><span class="line">        self.a = <span class="literal">None</span></span><br><span class="line">        self.b = <span class="literal">None</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&quot;__main__&quot;</span>:</span><br><span class="line">    exp = Exp()</span><br><span class="line">    exp.c = <span class="number">3</span></span><br><span class="line">    <span class="built_in">print</span>(exp.c)</span><br></pre></td></tr></table></figure>
+<p>我们定义了一个类叫做<code>Exp</code>，我们为它创建了a和b两个成员。但是我们在使用的时候，<strong>对c成员进行了赋值</strong>。要知道<code>Exp</code>类当中是没有成员c的，但是程序并不会报错，我们这么运行了之后它会将c添加进这个实例当中。</p>
+<p>从一方面来看，这当然非常灵活，但是另一方面，这也留下了<strong>隐患</strong>。如果用户随意添加属性，可能会导致未知的问题，尤其在复杂的系统当中。所以有些时候为了严谨，我们会不希望用户做这种动态的修改。<code>__slots__</code>正是用来做这个的。</p>
+<p>我们把这个关键字加上，再来运行结果就不一样了：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Exp</span>:</span><br><span class="line"></span><br><span class="line">    __slots__ = [<span class="string">&#x27;a&#x27;</span>, <span class="string">&#x27;b&#x27;</span>]</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self</span>):</span><br><span class="line">        self.a = <span class="literal">None</span></span><br><span class="line">        self.b = <span class="literal">None</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&quot;__main__&quot;</span>:</span><br><span class="line">    exp = Exp()</span><br><span class="line">    exp.c = <span class="number">3</span></span><br><span class="line">    <span class="built_in">print</span>(exp.c)</span><br></pre></td></tr></table></figure>
+<p>如果你运行这段代码的话，你会得到一个报错，<strong>提示你<code>Exp</code>这个对象当中并没有c这个成员</strong>，也就是说我们只能运用<code>__slots__</code>这个关键字当中定义的成员，对于没有定义的成员不能随意创建，这样就限制了用户的使用。</p>
+<p>虽然现在大部分人使用这个关键字都是报着这个目的，但是很遗憾的是，Python创建者的初衷其实并不是这个。这就谈到了<code>__slots__</code>关键字的第二个作用，就是<strong>节省内存</strong>。</p>
+<p>如果了解过Python底层的实现原理，你会发现在Python当中<strong>为每一个实例都创建了一个字典</strong>，就是大名鼎鼎的<code>__dict__</code>字典。正是因为背后有一个字典，所以我们才可以创造出原本不存在的成员，也才支持这样动态的效果。我们可以人工地调用这个字典输出其中的内容，我们在加上<code>__slots__</code>关键字之前，输出的结果是这样的：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;<span class="string">&#x27;a&#x27;</span>: <span class="literal">None</span>, <span class="string">&#x27;b&#x27;</span>: <span class="literal">None</span>&#125;</span><br></pre></td></tr></table></figure>
+<p>但是加上了这个关键字之后，会<strong>得到一个报错</strong>，会告诉你<code>Exp</code>这个对象当中没有<code>__dict__</code>这个成员。原因很简单，因为使用<code>dict</code>来维护实例，会消耗大量的内存，额外存储了许多数据，而使用<code>__slots__</code>之后，Python内部将不再为实例创建一个字典来维护，而是会使用一个固定大小的数组，这样就节省了大量的空间。这个节省可不是一点半点，一般可以<strong>节省一半以上</strong>。也就是说牺牲了一定的灵活性，保证了性能。这一点也是<code>__slots__</code>这个关键字设计的初衷，但是现在很多人都用错了地方。</p>
+<h2 id="property"><a href="#property" class="headerlink" title="property"></a>property</h2><p>这个关键字在的文章当中曾经提到过，不过很不好意思的是，由于之前写文章的时候对它的了解还很有限，导致一些阐述存在一些谬误，所以这里再提一下这个关键字的运用作为弥补。</p>
+<p><code>property</code>可以帮我们<strong>绑定类当中一些属性的赋值和获取</strong>，也就是<code>get</code>和<code>set</code>。我们来看个例子：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Exp</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, param</span>):</span><br><span class="line">        self.param = param</span><br><span class="line"></span><br><span class="line"><span class="meta">    @property</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">param</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="keyword">return</span> self._param</span><br><span class="line"></span><br><span class="line"><span class="meta">    @param.setter</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">param</span>(<span class="params">self, value</span>):</span><br><span class="line">        self._param = value</span><br></pre></td></tr></table></figure>
+<p>这里的<code>property</code>注解会在我们调用<code>.param</code>的时候被执行，而<code>param.setter</code>会在我们为<code>param</code>这个属性赋值的时候被执行。所以你可能会奇怪，为什么我们在<code>__init__</code>方法当中初始化的时候用的是<code>self.param = param</code>而不是<code>self._param = param</code>，这是因为我们在执行前者的时候，Python<strong>一样会调用<code>@param.setter</code></strong>这个注解，所以我们没有必要写成后者的形式。当然你也可以这么写，不过两者是完全等价的。</p>
+<p>作为一个前Java程序员<strong>为类当中所有变量加上get和set方法</strong>几乎成了政治正确，所以我特别喜欢为类当中所有的属性加上<code>property</code>。但是<strong>这是不对的</strong>，加上property是非常耗时的，所以如非必要不要这么做，我们直接调用来进行赋值就好了，如果有必要，我们可以手动写上<code>get</code>和<code>set</code>方法。那么问题来了，既然不是为了规范，那么我们又为什么要用到<code>property</code>呢？</p>
+<p>答案很简单，为了<strong>校验变量类型</strong>。</p>
+<p>由于Python是动态语言，并且是隐式类型的，所以我们拿到变量的时候并不知道它究竟是什么类型，也不知道用户为给它赋值成什么类型。所以在一些情况下我们可能会希望做好限制，告诉用户只能将这个变量赋值成这个类型，否则就会报错。通过使用<code>property</code>，我们可以很方便地做到这点。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Exp</span>:</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, param</span>):</span><br><span class="line">        self.param = param</span><br><span class="line"></span><br><span class="line"><span class="meta">    @property</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">param</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="keyword">return</span> self._param</span><br><span class="line"></span><br><span class="line"><span class="meta">    @param.setter</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">param</span>(<span class="params">self, value</span>):</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> <span class="built_in">isinstance</span>(value, <span class="built_in">str</span>):</span><br><span class="line">            <span class="keyword">raise</span> TypeError(<span class="string">&#x27;Want a string&#x27;</span>)</span><br><span class="line">        self._param = value</span><br></pre></td></tr></table></figure>
+<p>除此之外，<code>property</code>还有一个用法是<strong>代替函数</strong>。举个例子：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Exp</span>:</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, param</span>):</span><br><span class="line">        self.param = param</span><br><span class="line"></span><br><span class="line"><span class="meta">    @property</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">param</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="keyword">return</span> self._param</span><br><span class="line"></span><br><span class="line"><span class="meta">    @param.setter</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">param</span>(<span class="params">self, value</span>):</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> <span class="built_in">isinstance</span>(value, <span class="built_in">str</span>):</span><br><span class="line">            <span class="keyword">raise</span> TypeError(<span class="string">&#x27;Want a string&#x27;</span>)</span><br><span class="line">        self._param = value</span><br><span class="line"></span><br><span class="line"><span class="meta">    @property</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">hello</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&#x27;hello &#x27;</span> + self.param</span><br></pre></td></tr></table></figure>
+<p>这样我们就可以通过<code>.hello</code>来代替调用一个函数，这样做其实是一种<strong>动态计算</strong>。hello的结果并没有被存储起来，之后当我们调用的时候才会执行，在一些场景下这样做会非常方便。</p>
+<h2 id="命名规范"><a href="#命名规范" class="headerlink" title="命名规范"></a>命名规范</h2><p>最后我们来看下Python对象当中的命名规范，在之前的文章当中我们曾经说过，在Python当中没有对<code>public</code>和<code>private</code>的字段做区分，<strong>所有的字段都是<code>public</code>的</strong>，也就是说用户可以拿到类当中所有的字段和方法。为了规范，程序员们约定俗成，决定所有<strong>加了下划线的方法和变量都看成是<code>private</code></strong>的，即使我们能调用，但是一般情况下我们也不这么干。</p>
+<p>所以我们通常会写两个方法，一个是公开的接口，一个是内部的实现。我们调用的时候只调用公开的接口，公开的接口再去调用内部的实现。这在Python当中已经成了惯例，因为我们在调用内部方法的时候，往往还会传入一些内部的参数。</p>
+<p>我们来看个简单的例子：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">ExpA</span>:</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">public_func</span>(<span class="params">self</span>):</span><br><span class="line">       self._private_func()</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">_private_func</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;private ExpA&#x27;</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&quot;__main__&quot;</span>:</span><br><span class="line">    exp = ExpA()</span><br><span class="line">    exp.public_func()</span><br></pre></td></tr></table></figure>
+<p>除了_之外我们经常还会看到一些<strong>两个下划线的变量和方法</strong>，那么它们之间又有什么区别呢？</p>
+<p>为了回答这个问题，我们来看下面这个例子：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">ExpA</span>:</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">public_func</span>(<span class="params">self</span>):</span><br><span class="line">       self.__private_func()</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__private_func</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;private ExpA&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">ExpB</span>(<span class="title class_ inherited__">ExpA</span>):</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">public_func</span>(<span class="params">self</span>):</span><br><span class="line">       self.__private_func()</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__private_func</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;private ExpB&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&quot;__main__&quot;</span>:</span><br><span class="line">    exp = ExpB()</span><br><span class="line">    exp.public_func()</span><br><span class="line">    exp._ExpB__private_func()</span><br><span class="line">    exp._ExpA__private_func()</span><br></pre></td></tr></table></figure>
+<p>请问最后会输出什么？</p>
+<p>我们试一下就知道，第一行输出的是<code>private ExpB</code>，这个没有问题。但是后面两个是什么？</p>
+<p>后面两个就是<code>__private_func</code>，只不过<strong>系统自动将它重新命名</strong>了。重新命名的原因也很简单，因为Python<strong>禁止加了两个下划线的方法被子类覆盖</strong>。所以这两者的区别就在这里，它们都被认为是<code>private</code>的方法和属性，但是一个下划线允许子类覆盖，而两个下划线不行。所以如果我们在开发的时候希望我们某一个方法不会被子类覆盖，那么我们就需要加上两个下划线。</p>
+<p>最后，我们来看一个小问题。在C++当中当我们的变量名和系统的关键字冲突的时候，我们往往会在变量前面加上一个_来作为区分。但是由于Python当中下划线被赋予了含义，所以我们不能这么干，那么当变量冲突的时候应该怎么办呢？答案也很简单，我们可以<strong>把下划线加在后面</strong>，比如<code>lambda_</code>。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>回顾一下今天的内容，主要是<code>__slots__</code>, <code>property</code>和下划线在类当中的使用。这三者都是Python面向对象当中<strong>经常用到</strong>的知识，了解它们不但可以让我们写出更规范的代码，也有助于帮助我们理解其他大牛的源码，因此是非常必要的。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://www.ailinghang.club/2023/04/16/python-class/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/ai.jpg">
+      <meta itemprop="name" content="Ai领航员">
+      <meta itemprop="description" content="人工智能从零入门教程">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ai领航员">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/04/16/python-class/" class="post-title-link" itemprop="url">python中对象的输入方法</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2023-04-16 11:21:13 / 修改时间：11:27:33" itemprop="dateCreated datePublished" datetime="2023-04-16T11:21:13+08:00">2023-04-16</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Python/" itemprop="url" rel="index"><span itemprop="name">Python</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>2.3k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>2 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>这篇文章我们来聊聊Python当中的类。</p>
+<h2 id="打印实例"><a href="#打印实例" class="headerlink" title="打印实例"></a>打印实例</h2><p>我们先从类和对象当中最简单的打印输出开始讲起，打印一个实例是一个非常不起眼的应用，但是在实际的编程当中却非常重要。原因也很简单，因为我们debug的时候往往会想看下某个类当中的内容是不是符合我们的预期。但是我们直接<code>print</code>输出的话，只会得到一个地址。</p>
+<p>我们来看一个例子：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">point</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, x, y</span>):</span><br><span class="line">        self.x = x</span><br><span class="line">        self.y = y</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&quot;__main__&quot;</span>:</span><br><span class="line">    p = point(<span class="number">3</span>, <span class="number">4</span>)</span><br><span class="line">    <span class="built_in">print</span>(p)</span><br></pre></td></tr></table></figure>
+<p>在这段代码当中我们定义了一个简单的类，它当中有x和y两个元素，但是如果我们直接运行的话，屏幕上会输出这样一个结果：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;__main__.point object at 0x10a18c210&gt;</span><br></pre></td></tr></table></figure>
+<p>这个是解释器在执行的时候这个实例的一些相关信息，但是对于我们来说几乎没有参考意义，我们想要的是这个实例当中具体的值，而不是一个内存当中的地址。</p>
+<p>想要实现这个功能，我们有很多方法，下面我们一一来看。</p>
+<h2 id="str-方法"><a href="#str-方法" class="headerlink" title="__str__方法"></a>__str__方法</h2><p><code>__str__</code>方法大家应该都不陌生，它类似于Java当中的<code>toString</code>方法，可以根据我们的需要返回实例转化成字符串之后的结果。</p>
+<p>比如，我们可以在类当中重载这个方法，就可以根据我们的需要输出结果了：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">point</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, x, y</span>):</span><br><span class="line">        self.x = x</span><br><span class="line">        self.y = y</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__str__</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&#x27;x: %s, y: %s&#x27;</span> % (self.x, self.y)</span><br></pre></td></tr></table></figure>
+<p>当我们运行它，得到的结果会是：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">x: 3, y: 4</span><br></pre></td></tr></table></figure>
+<p><code>__str__</code>和<code>__init__</code>, <code>__len__</code>很多函数一样是Python中的特殊函数，在我们创建类的时候，系统会我们隐式创造许多这样的特殊函数。我们可以根据需要重载其中的一部分完成我们想要的功能。比如如果我们写的是一棵二叉树的类，我们还可以在<code>__str__</code>函数当中进行递归遍历所有的节点，打印出完整的树来。</p>
+<h2 id="repr-方法"><a href="#repr-方法" class="headerlink" title="__repr__方法"></a>__repr__方法</h2><p>你也许可能也听说过<code>__repr__</code>函数，它也可以实现根据我们的需要自定义输出的功能。比如我们把上面的代码改下函数名，也可以得到一样的结果。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">point</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, x, y</span>):</span><br><span class="line">        self.x = x</span><br><span class="line">        self.y = y</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__repr__</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&#x27;x: %s, y: %s&#x27;</span> % (self.x, self.y)</span><br></pre></td></tr></table></figure>
+<p>我们运行它，同样会得到：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">x: 3, y: 4</span><br></pre></td></tr></table></figure>
+<p>这是为什么呢，难道<code>__repr__</code>和<code>__str__</code>是一样的吗？如果是一样的，Python的设计者干嘛要保留两个完全相同的函数呢，为什么不去掉其中一个呢？</p>
+<p>在分析原因之前，我们先来做一个实验，如果我们两个函数都重载，那么当我们输出的时候，程序执行的是哪一个呢？为了做好区分，我们把<code>__repr__</code>当中的输出的格式稍微修改一下。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">point</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, x, y</span>):</span><br><span class="line">        self.x = x</span><br><span class="line">        self.y = y</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__str__</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&#x27;x: %s, y: %s&#x27;</span> % (self.x, self.y)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__repr__</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&#x27;&lt;point x: %s, y: %s&gt;&#x27;</span> % (self.x, self.y)</span><br></pre></td></tr></table></figure>
+<p>我们运行之后，会发现输出的结果还是：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">x: 3, y: 4</span><br></pre></td></tr></table></figure>
+<p>先别着急下结论，我们再把这段代码拷贝到jupyter当中，我们这次不通过打印输出，而通过jupyter自带的交互框输出交互结果，我们再来看下：</p>
+<p><img src="https://moutsea-blog.oss-cn-hangzhou.aliyuncs.com/F0DF91A9085CFCBBF35109399138A91C.jpg" alt="IMAGE"></p>
+<p>奇怪，怎么结果就变成了<code>__repr__</code>的结果了呢？</p>
+<p>其实这正是反应了两者的区别，如果简单理解，这两个函数都是将一个实例转成字符串。但是不同的是，两者的使用场景不同，其中<code>__str__</code>更加侧重展示。所以当我们<code>print</code>输出给用户或者使用<code>str</code>函数进行类型转化的时候，Python都会默认优先调用<code>__str__</code>函数。而<code>__repr__</code>更侧重于这个实例的报告，除了实例当中的内容之外，我们往往还会附上它的类相关的信息，因为这些内容是给开发者看的。所以当我们在交互式窗口输出的时候，它会优先调用<code>__repr__</code>。</p>
+<p>理论上来说，对于一个合格的<code>__repr__</code>函数要能够做到:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">eval</span>(<span class="built_in">repr</span>(obj)) == obj</span><br></pre></td></tr></table></figure>
+<p>也就是说我们通过<code>__repr__</code>输出的内容执行之后可以再还原得到这个实例本身，当然在一些场景下这个非常难以实现，所以我们退而求其次，保证<code>__repr__</code>当中输出类和对象足够多的信息，方便开发者调试和使用即可。</p>
+<p>另外多说一句，repr是report的缩写，所以它有一个报告的意思在里面，而<code>str</code>就只是转化成字符串而已。这两者还是有一定区别的。</p>
+<h2 id="format"><a href="#format" class="headerlink" title="format"></a>format</h2><p>Python当中最常用的输出函数除了上面两个之外，还有一个就是format。</p>
+<p>比较简单的用法就是通过{}代表变量，然后按照顺序依次输入：</p>
+<p><img src="https://moutsea-blog.oss-cn-hangzhou.aliyuncs.com/259DE04CA4CD1C228F877AA839942A0F.jpg" alt="IMAGE"></p>
+<p>除此之外，我们还可以进一步写明花括号里的变量名称，进一步增加可读性：</p>
+<p><img src="https://moutsea-blog.oss-cn-hangzhou.aliyuncs.com/4611B780C0BF25F39E2183CA7F83A7C5.jpg" alt="IMAGE"></p>
+<p>format的功能远不止如此，它还支持许多参数，类似于C语言当中的<code>printf</code>，可以通过不同的参数做到各种各样的输出。比如控制小数点后面保留的位数，或者是转化成百分数、科学记数法、左右对齐等功能。这里不一一列举了，大家用到的时候再查询即可。</p>
+<p>我们当然可以使用format重新<code>__repr__</code>和<code>__str__</code>当中的逻辑，但这并不能体现它的强大。因为在Python当中，也为类提供了<strong>format</strong>这个特殊函数，通过重写<code>__format__</code>和使用format，我们可以做到更牛的功能。</p>
+<h2 id="format联合-format"><a href="#format联合-format" class="headerlink" title="format联合__format__"></a>format联合__format__</h2><p>我们可以在类当中重载<code>__format__</code>函数，这样我们就可以在外部直接通过format函数来调用对象，输出我们想要的结果。</p>
+<p>我们来看代码：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">point</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, x, y</span>):</span><br><span class="line">        self.x = x</span><br><span class="line">        self.y = y</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__str__</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&#x27;x: %s, y: %s&#x27;</span> % (self.x, self.y)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__format__</span>(<span class="params">self, code</span>):</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&#x27;x: &#123;x&#125;, y: &#123;y&#125;&#x27;</span>.<span class="built_in">format</span>(x = self.x, y = self.y)</span><br></pre></td></tr></table></figure>
+<p>我们把刚才的<strong>repr</strong>改成了<strong>format</strong>，但是需要注意一个细节，我们多加了一个参数<code>code</code>，这是由于format当中支持通过参数来对处理逻辑进行配置的功能，所以我们必须要在接口处多加一个参数。加好了以后，我们就可以直接调用<code>format(p)</code>了。</p>
+<p><img src="https://moutsea-blog.oss-cn-hangzhou.aliyuncs.com/007S8ZIlgy1gfndypuhdpj30qi03ut95.jpg" alt="IMAGE"></p>
+<p>到这里还没有结束，在有些场景当中，对于同一个对象我们可能有多种输出的格式。比如点，在有些场景下我们可能希望输出<code>(x, y)</code>，有时候我们又希望输出<code>x: 3, y: 4</code>，可能还有些场景当中，我们希望输出<code>&lt;x, y&gt;</code>。</p>
+<p>我们针对这么多场景，如果各自实现不同的接口会非常麻烦。这个时候利用<code>__format__</code>当中的这个参数，就可以大大简化这个过程，我们来看代码：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">formats = &#123;</span><br><span class="line">    <span class="string">&#x27;normal&#x27;</span>: <span class="string">&#x27;x: &#123;p.x&#125;, y: &#123;p.y&#125;&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;point&#x27;</span> : <span class="string">&#x27;(&#123;p.x&#125;, &#123;p.y&#125;)&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;prot&#x27;</span>: <span class="string">&#x27;&lt;&#123;p.x&#125;, &#123;p.y&#125;&gt;&#x27;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">point</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, x, y</span>):</span><br><span class="line">        self.x = x</span><br><span class="line">        self.y = y</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__str__</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&#x27;x: %s, y: %s&#x27;</span> % (self.x, self.y)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__format__</span>(<span class="params">self, code</span>):</span><br><span class="line">        <span class="keyword">return</span> formats[code].<span class="built_in">format</span>(p=self)</span><br></pre></td></tr></table></figure>
+<p>我们在调用的时候就可以通过参数来控制我们究竟使用哪一种格式来格式化对象了：</p>
+<p><img src="https://moutsea-blog.oss-cn-hangzhou.aliyuncs.com/C7FD3E3389121B55668BADE246513F51.jpg" alt="IMAGE"></p>
+<p>也就是说通过重载<code>__format__</code>方法，我们把原本固定的格式化的逻辑做成了可配置的。这样大大增加了我们使用过程当中的灵活性，这种灵活性在一些问题场景当中可以大大简化和简洁我们的代码。对于Python这门语言来说，我个人感觉实现功能只是其中很小的一个部分，把代码写得简洁美观，才是其中的大头。这也是为什么很多人都说Python是一门易学难精的语言的原因。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://www.ailinghang.club/2023/04/06/slack-install/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/ai.jpg">
+      <meta itemprop="name" content="Ai领航员">
+      <meta itemprop="description" content="人工智能从零入门教程">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ai领航员">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/04/06/slack-install/" class="post-title-link" itemprop="url">slack安装教程</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2023-04-06 13:38:45 / 修改时间：14:02:48" itemprop="dateCreated datePublished" datetime="2023-04-06T13:38:45+08:00">2023-04-06</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/ChatGPT/" itemprop="url" rel="index"><span itemprop="name">ChatGPT</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>1k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="Slack-安装教程"><a href="#Slack-安装教程" class="headerlink" title="Slack 安装教程"></a>Slack 安装教程</h1><p>包含Windows、MAC、IOS、android</p>
+<h2 id="WINDOWS"><a href="#WINDOWS" class="headerlink" title="WINDOWS"></a>WINDOWS</h2><ol>
+<li>打开电脑自带的<strong>应用商店</strong>（Microsoft Store）；</li>
+</ol>
+<p><img src="https://moutsea-blog.oss-cn-hangzhou.aliyuncs.com/image-20230406134138036.png" alt=""></p>
+<ol>
+<li>搜索栏搜索<strong>slack</strong>并点击右侧“<strong>获取</strong>”</li>
+</ol>
+<p><img src="https://moutsea-blog.oss-cn-hangzhou.aliyuncs.com/image-20230406134232251.png" alt=""></p>
+<ol>
+<li>下载完成后点击“<strong>打开</strong>”</li>
+</ol>
+<p><img src="https://moutsea-blog.oss-cn-hangzhou.aliyuncs.com/image-20230406134252596.png" alt=""></p>
+<ol>
+<li>点击<strong>登录（Sign</strong> <strong>in），</strong>跳转到浏览器界面，选择<strong>邮箱登录（Sign</strong> <strong>in</strong> <strong>with</strong> <strong>Email）</strong></li>
+</ol>
+<p><img src="https://moutsea-blog.oss-cn-hangzhou.aliyuncs.com/image-20230406134345237.png" alt=""></p>
+<ol>
+<li>点击分享的邀请链接（<a target="_blank" rel="noopener" href="https://aidialogue.slack.com/join/shared_invite/zt-1s8rkrclc-eumSRFQ7kxdlyY1VQ4S0BA#/shared-invite/email">注册链接</a>），<strong>使用电子邮件继续（Continue</strong> <strong>with Email</strong>）</li>
+</ol>
+<p><img src="https://moutsea-blog.oss-cn-hangzhou.aliyuncs.com/image-20230406134412975.png" alt=""></p>
+<ol>
+<li>注册账户，设置密码，登录进入AI Dialogue slack社区</li>
+</ol>
+<p><img src="https://moutsea-blog.oss-cn-hangzhou.aliyuncs.com/image-20230406134431159.png" alt=""></p>
+<ol>
+<li>访问<a href="https://www.ailinghang.club/2023/04/05/slack-guide/">ai-bot使用教程</a>，了解如何使用和付费</li>
+</ol>
+<h2 id="MAC"><a href="#MAC" class="headerlink" title="MAC"></a>MAC</h2><ol>
+<li>点击电脑桌面App Store</li>
+</ol>
+<p><img src="https://moutsea-blog.oss-cn-hangzhou.aliyuncs.com/image-20230406134513295.png" alt=""></p>
+<ol>
+<li>搜索slack，点击GET，获取软件</li>
+</ol>
+<p><img src="https://moutsea-blog.oss-cn-hangzhou.aliyuncs.com/image-20230406134526504.png" alt=""></p>
+<ol>
+<li>下载完成后点击打开</li>
+<li>点击<strong>登录（Sign</strong> <strong>in），</strong>跳转到浏览器界面，选择<strong>邮箱登录（Sign</strong> <strong>in</strong> <strong>with</strong> <strong>Email）</strong></li>
+</ol>
+<p><img src="https://moutsea-blog.oss-cn-hangzhou.aliyuncs.com/image-20230406134559482.png" alt=""></p>
+<ol>
+<li>点击分享的邀请链接（<a target="_blank" rel="noopener" href="https://aidialogue.slack.com/join/shared_invite/zt-1s8rkrclc-eumSRFQ7kxdlyY1VQ4S0BA#/shared-invite/email">注册链接</a>），<strong>使用电子邮件继续（Continue</strong> <strong>with Email</strong>）</li>
+</ol>
+<p><img src="https://moutsea-blog.oss-cn-hangzhou.aliyuncs.com/image-20230406134622363.png" alt=""></p>
+<ol>
+<li>注册账户，设置密码，登录进入AI Dialogue 社区</li>
+</ol>
+<p><img src="https://moutsea-blog.oss-cn-hangzhou.aliyuncs.com/image-20230406134647620.png" alt=""></p>
+<ol>
+<li>访问<a href="https://www.ailinghang.club/2023/04/05/slack-guide/">ai-bot使用教程</a>，了解如何使用和付费</li>
+</ol>
+<h2 id="IOS"><a href="#IOS" class="headerlink" title="IOS"></a>IOS</h2><ol>
+<li>点击苹果应用商店（APP Store）</li>
+<li>搜索slack、下载并打开</li>
+</ol>
+<p><img src="https://moutsea-blog.oss-cn-hangzhou.aliyuncs.com/wps1.jpg" alt=""> </p>
+<ol>
+<li><p>如上windows第四步，用邮箱注册账号</p>
+</li>
+<li><p>点击分享的邀请链接（<a target="_blank" rel="noopener" href="https://aidialogue.slack.com/join/shared_invite/zt-1s8rkrclc-eumSRFQ7kxdlyY1VQ4S0BA#/shared-invite/email">注册链接</a>），<strong>使用电子邮件继续（Continue</strong> <strong>with Email</strong>）</p>
+</li>
+<li><p>跳转slack，进入AI Dialogue社区</p>
+</li>
+<li>访问<a href="https://www.ailinghang.club/2023/04/05/slack-guide/">ai-bot使用教程</a>，了解如何使用和付费</li>
+</ol>
+<h2 id="ANDROID"><a href="#ANDROID" class="headerlink" title="ANDROID"></a>ANDROID</h2><p><strong>备注</strong>：各大品牌手机的应用商店里面可能没有上架slack应用，如果手机里已经安装过Google Play可以直接下载，如果没有的话，可以打开浏览器登录一下网址：</p>
+<p><a target="_blank" rel="noopener" href="https://apkpure.com/slack/com.Slack">https://apkpure.com/slack/com.Slack</a></p>
+<p>（！！！！！！ <strong>下载的时候，务必小心广告</strong>！！！！！！）</p>
+<p>下载完成之后，直接点击继续安装，由于不是应用商店的应用，需要输入一次锁屏密码，实现继续安装。</p>
+<ol>
+<li>输入上述网址，直接下载安装包</li>
+</ol>
+<p><img src="https://moutsea-blog.oss-cn-hangzhou.aliyuncs.com/wps2.jpg" alt=""> </p>
+<ol>
+<li><p>点击slack应用，准备下载</p>
+<p><img src="https://moutsea-blog.oss-cn-hangzhou.aliyuncs.com/image-20230406135231921.png" alt=""></p>
+</li>
+<li><p>注意别点击广告，<strong>下滑</strong>选择正确的下载对象</p>
+</li>
+</ol>
+<p><img src="https://moutsea-blog.oss-cn-hangzhou.aliyuncs.com/wps6.jpg" alt="">     <img src="https://moutsea-blog.oss-cn-hangzhou.aliyuncs.com/wps7.jpg" alt="img"></p>
+<ol>
+<li>下载完成后，直接点击安装</li>
+</ol>
+<p><img src="https://moutsea-blog.oss-cn-hangzhou.aliyuncs.com/wps8.jpg" alt=""> </p>
+<p><img src="https://moutsea-blog.oss-cn-hangzhou.aliyuncs.com/wps9.jpg" alt=""> </p>
+<ol>
+<li>点击分享的邀请链接（<a target="_blank" rel="noopener" href="https://aidialogue.slack.com/join/shared_invite/zt-1s8rkrclc-eumSRFQ7kxdlyY1VQ4S0BA#/shared-invite/email">注册链接</a>），<strong>使用电子邮件继续（Continue</strong> <strong>with Email</strong>）</li>
+</ol>
+<p><img src="https://moutsea-blog.oss-cn-hangzhou.aliyuncs.com/wps10.jpg" alt="">         <img src="https://moutsea-blog.oss-cn-hangzhou.aliyuncs.com/wps11.jpg" alt=""></p>
+<ol>
+<li>切换到手机端slack，点击登录，选用工作区网址登录（aidialogue.slack.com）</li>
+</ol>
+<p><img src="https://moutsea-blog.oss-cn-hangzhou.aliyuncs.com/wps12.jpg" alt="">   <img src="https://moutsea-blog.oss-cn-hangzhou.aliyuncs.com/wps13.jpg" alt=""></p>
+<ol>
+<li><p>输入创建的账户（邮箱地址）与密码，进入AI Dialogue之后尽情畅玩</p>
+</li>
+<li><p>访问<a href="https://www.ailinghang.club/2023/04/05/slack-guide/">ai-bot使用教程</a>，了解如何使用和付费</p>
+</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://www.ailinghang.club/2023/04/05/slack-guide/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/ai.jpg">
+      <meta itemprop="name" content="Ai领航员">
+      <meta itemprop="description" content="人工智能从零入门教程">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ai领航员">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/04/05/slack-guide/" class="post-title-link" itemprop="url">无需科学上网，使用ChatGPT</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2023-04-05 17:51:38" itemprop="dateCreated datePublished" datetime="2023-04-05T17:51:38+08:00">2023-04-05</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-04-15 22:24:58" itemprop="dateModified" datetime="2023-04-15T22:24:58+08:00">2023-04-15</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/ChatGPT/" itemprop="url" rel="index"><span itemprop="name">ChatGPT</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>1.6k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>大家好，欢迎来到Ai Dialogue社区。</p>
+<p>鉴于有些小伙伴对于如何使用slack以及ai-bot还不太清楚，所以写了本教程希望能帮助大家答疑解惑。</p>
+<h2 id="ai-bot是什么？"><a href="#ai-bot是什么？" class="headerlink" title="ai-bot是什么？"></a>ai-bot是什么？</h2><p><img src="https://moutsea-blog.oss-cn-hangzhou.aliyuncs.com/image-20230405171951752.png" alt=""></p>
+<p>ai-bot是Ai Dialogue社区基于openai的api开发的人工智能聊天机器人，旨在帮助大家解决因为网络以及账号问题无法使用ChatGPT的困扰。</p>
+<h2 id="如何使用ai-bot？"><a href="#如何使用ai-bot？" class="headerlink" title="如何使用ai-bot？"></a>如何使用ai-bot？</h2><p>在聊天框中输入@符号，再选中ai-bot，后面输入你的对话或问题即可。</p>
+<p><img src="https://moutsea-blog.oss-cn-hangzhou.aliyuncs.com/image-20230405172136492.png" alt=""></p>
+<p>如：</p>
+<p><img src="https://moutsea-blog.oss-cn-hangzhou.aliyuncs.com/image-20230405172304254.png" alt=""></p>
+<p>等待一小段时间之后，ai-bot会在同一个Thread中回复（方便查看），点击蓝色的<code>reply</code>即可看到ai-bot的回复。</p>
+<p><img src="https://moutsea-blog.oss-cn-hangzhou.aliyuncs.com/image-20230405172339634.png" alt=""></p>
+<p>如有需要还可以在同一个聊天框中继续对话：</p>
+<p><img src="https://moutsea-blog.oss-cn-hangzhou.aliyuncs.com/image-20230405172603500.png" alt=""></p>
+<p>普通用户可以在<code>general, random</code>群中与ai-bot自由对话。pro用户可以与ai-bot 1v1私聊对话，并且能开启ai-bot上下文记忆功能。</p>
+<p><img src="https://moutsea-blog.oss-cn-hangzhou.aliyuncs.com/image-20230405172826784.png" alt=""></p>
+<p>新用户免费获得15条私聊服务，点开ai-bot之后，会自动返回当前会员以及当前免费额度使用情况：</p>
+<p><img src="https://moutsea-blog.oss-cn-hangzhou.aliyuncs.com/image-20230415212830605.png" alt=""></p>
+<p>每邀请一名新同学加入社区，双方均可获得15次聊天额度以及10次绘画额度。</p>
+<p>邀请方法：</p>
+<ul>
+<li>对方下载安装slack</li>
+<li>通过邀请链接加入社区：<a target="_blank" rel="noopener" href="https://aidialogue.slack.com/ssb/redirect#/shared-invite/email">邀请链接</a></li>
+<li>加入之后，通过命令<code>/ticket + 邀请码</code>完成邀请</li>
+</ul>
+<p>邀请码在ai-bot主页查看，每人只能被邀请一次，邀请对象不限量</p>
+<p><img src="https://moutsea-blog.oss-cn-hangzhou.aliyuncs.com/image-20230415215407930.png" alt=""></p>
+<h2 id="命令"><a href="#命令" class="headerlink" title="命令"></a>命令</h2><p>除了聊天之外，我们还为ai-bot开发了一些常用的命令功能。</p>
+<p>要使用命令，需要先打开ai-bot的聊天框（私聊ai-bot）。搜索栏中搜索ai-bot：</p>
+<p><img src="https://moutsea-blog.oss-cn-hangzhou.aliyuncs.com/image-20230406195137559.png" alt=""></p>
+<p>在聊天框中输入<code>/</code>，会弹出一个单独的输入框用来输入命令：</p>
+<p><img src="https://moutsea-blog.oss-cn-hangzhou.aliyuncs.com/image-20230415215631248.png" alt=""></p>
+<p>我们选中我们想要执行的命令，加上合适的参数即可。</p>
+<h3 id="ticket-命令"><a href="#ticket-命令" class="headerlink" title="/ticket 命令"></a>/ticket 命令</h3><p><code>/ticket</code>命令用来完成邀请，后面跟邀请人的邀请码</p>
+<p><img src="https://moutsea-blog.oss-cn-hangzhou.aliyuncs.com/image-20230415220237681.png" alt=""></p>
+<h3 id="chat-命令"><a href="#chat-命令" class="headerlink" title="/chat 命令"></a>/chat 命令</h3><p><code>/chat</code>用来延长或购买基础会员，后面跟上想要购买的月数。如：<code>/chat 3</code>表示购买三个月，三个月起购。</p>
+<p>注意，<code>/chat</code>命令只能用来购买基础会员，如果已经是<code>pro</code>会员，需要使用<code>/chatpro</code>命令，或者可以等<code>pro</code>会员到期之后再购买。</p>
+<p>命令输入之后，ai-bot会返回付款二维码，使用支付宝付款即可。</p>
+<h3 id="chatpro-命令"><a href="#chatpro-命令" class="headerlink" title="/chatpro 命令"></a>/chatpro 命令</h3><p>用法和<code>/chat</code>命令一样，用来进行<code>pro</code>会员的购买和续费。</p>
+<p>如果已经是基础会员且没有到期，那么收取的是升级的费用，<strong>会自动将剩余的日期升级成<code>pro</code>会员，会扣除基础会员的差价</strong>。</p>
+<p>付款成功之后支付宝会自动跳转，<strong>不要着急退出！！！</strong>看到支付成功的文案就表示购买成功了。</p>
+<p><img src="https://moutsea-blog.oss-cn-hangzhou.aliyuncs.com/image-20230405174225747.png" alt=""></p>
+<h3 id="translator-tourist-dictionary-interviewer"><a href="#translator-tourist-dictionary-interviewer" class="headerlink" title="/translator, /tourist, /dictionary, /interviewer"></a>/translator, /tourist, /dictionary, /interviewer</h3><p>切换ai角色，目前仅对pro会员开放</p>
+<p>其中translator为翻译官，可以翻译以及润色文案。</p>
+<p>tourist是旅行家， 可以提供旅行线路建议</p>
+<p>dictionary是词典，可以查询单词返回例句</p>
+<p>interviewer是Java面试官，可以模拟Java面试</p>
+<h3 id="英文聊天"><a href="#英文聊天" class="headerlink" title="英文聊天"></a>英文聊天</h3><p>直接发送语音消息，可以进行英文聊天，仅开放给pro会员。</p>
+<p><img src="https://moutsea-blog.oss-cn-hangzhou.aliyuncs.com/image-20230415221853711.png" alt=""></p>
+<h2 id="常见问题"><a href="#常见问题" class="headerlink" title="常见问题"></a>常见问题</h2><h3 id="会有使用次数限制吗？"><a href="#会有使用次数限制吗？" class="headerlink" title="会有使用次数限制吗？"></a>会有使用次数限制吗？</h3><p>没有次数和条数限制，大家可以自由使用。</p>
+<h3 id="ai-bot之后提示没有注册"><a href="#ai-bot之后提示没有注册" class="headerlink" title="@ai-bot之后提示没有注册"></a>@ai-bot之后提示没有注册</h3><p><img src="https://moutsea-blog.oss-cn-hangzhou.aliyuncs.com/image-20230405172423008.png" alt=""></p>
+<p>这是因为没有购买会员功能，slack本身是工作聊天工具（类似钉钉），注册slack是免费的。而ai-bot是我们AI Dialogue搭建和研发的，并且还有服务器以及账号等支出，因此需要收取一定的费用。只是注册slack是不够的，需要购买ai-bot会员服务。</p>
+<p>购买的方法见上文<code>/chat</code>和<code>/chatpro</code>命令的相关介绍。</p>
+<h3 id="我可以私人建群并且邀请ai-bot进群吗？"><a href="#我可以私人建群并且邀请ai-bot进群吗？" class="headerlink" title="我可以私人建群并且邀请ai-bot进群吗？"></a>我可以私人建群并且邀请ai-bot进群吗？</h3><p>不可以，虽然使用slack是免费的，但我们建立slack圈子也是收费的，并且费用还不低。如果要允许私人建群的话，我们暂时无力承担这么高的成本，所以暂时不开放私人群的功能。</p>
+<p>祝大家使用愉快，使用过程当中如果有任何问题，请与管理员@Lingo, @Liang, @atiyah联系，我们会尽我们所能回答你的问题。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://www.ailinghang.club/2023/04/01/python-8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/ai.jpg">
+      <meta itemprop="name" content="Ai领航员">
+      <meta itemprop="description" content="人工智能从零入门教程">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ai领航员">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/04/01/python-8/" class="post-title-link" itemprop="url">函数式编程与闭包</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2023-04-01 20:43:26 / 修改时间：20:50:29" itemprop="dateCreated datePublished" datetime="2023-04-01T20:43:26+08:00">2023-04-01</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Python/" itemprop="url" rel="index"><span itemprop="name">Python</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>3.4k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>3 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="函数式编程"><a href="#函数式编程" class="headerlink" title="函数式编程"></a>函数式编程</h2><p><strong>函数式编程</strong>这个概念我们可能或多或少都听说过，刚听说的时候不明觉厉，觉得这是一个非常黑科技的概念。但是实际上它的含义很朴实，但是延伸出来许多丰富的用法。</p>
+<p>在早期编程语言还不是很多的时候，我们会将语言分成<strong>高级语言与低级语言</strong>。比如汇编语言，就是低级语言，几乎什么封装也没有，做一个赋值运算还需要我们手动调用寄存器。而高级语言则从这些面向机器的指令当中抽身出来，转而面向过程或者是对象。也就是说我们写代码面向的是一段计算过程或者是一个计算机当中抽象出来的对象。如果你学过面向对象，你会发现和面向过程相比，面向对象的抽象程度更高了一些，做了更加完善的封装。</p>
+<p>在面向对象之后呢，我们还可以做什么封装和抽象呢？这就轮到了函数式编程。</p>
+<p>函数我们都了解，就是我们定义的一段程序，它的输入和输出都是确定的。我们把一段函数写好，它可以在任何地方进行调用。既然函数这么好用，那么能不能<strong>把函数也看成是一个变量进行返回和传参</strong>呢？</p>
+<p>OK，这个就是函数式编程最直观的特点。也就是说我们写的一段函数也可以作为变量，既可以用来赋值，还可以用来传递，并且还能进行返回。这样一来，大大方便了我们的编码，但是这并不是有利无害的，相反它带来许多问题，最直观的问题就是由于函数传入的参数还可以是另一个函数，这会<strong>导致函数的计算过程变得不可确定</strong>，许多超出我们预期的事情都有可能发生。</p>
+<p>所以函数式编程是有利有弊的，它的确简化了许多问题，但也产生了许多新的问题，我们在使用的过程当中需要谨慎。</p>
+<h2 id="传入、返回函数"><a href="#传入、返回函数" class="headerlink" title="传入、返回函数"></a>传入、返回函数</h2><p>在我们之前介绍<code>filter</code>、<code>map</code>、<code>reduce</code>以及自定义排序的时候，其实我们已经用到了函数式编程的概念了。</p>
+<p>比如在我们调用sorted进行排序的时候，如果我们传入的是一个对象数组，我们希望根据我们制定的字段排序，这个时候我们往往需要传入一个<strong>匿名函数</strong>，用来制定排序的字段。其实传入的匿名函数，其实就是函数式编程最直观的体现了：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sorted</span>(kids, key=<span class="keyword">lambda</span> x: x[<span class="string">&#x27;score&#x27;</span>])</span><br></pre></td></tr></table></figure>
+<p>除此之外，我们还可以返回一个函数，比如我们来看一个例子：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">delay_sum</span>(<span class="params">nums</span>):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">sum</span>():</span><br><span class="line">        s = <span class="number">0</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> nums:</span><br><span class="line">            s += i</span><br><span class="line">        <span class="keyword">return</span> s</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">sum</span></span><br></pre></td></tr></table></figure>
+<p>如果这个时候我们调用<code>delay_sum</code>传入一串数字，我们会得到什么？</p>
+<p>答案是一个函数，我们可以直接输出，从打印信息里看出这一点：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>delay_sum([<span class="number">1</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">2</span>])</span><br><span class="line">&lt;function delay_sum.&lt;<span class="built_in">locals</span>&gt;.<span class="built_in">sum</span> at <span class="number">0x1018659e0</span>&gt;</span><br></pre></td></tr></table></figure>
+<p>我们想获得这个运算结果应该怎么办呢？也很简单，我们用一个变量去接收它，然后执行这个新的变量即可：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>f = delay_sum([<span class="number">1</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">2</span>])</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>f()</span><br><span class="line"><span class="number">10</span></span><br></pre></td></tr></table></figure>
+<p>这样做有一个好处是我们可以<strong>延迟计算</strong>，如果不使用函数式编程，那么我们需要在调用<code>delay_sum</code>这个函数的时候就计算出结果。如果这个运算量很小还好，如果这个运算量很大，就会造成开销。并且当我们计算出结果来之后，这个结果也许不是立即使用的，可能到很晚才会用到。既然如此，我们返回一个函数代替了运算，当后面真正需要用到的时候再执行结果，从而延迟了运算。这也是很多计算框架的常用思路，比如<strong>spark</strong>。</p>
+<h2 id="闭包"><a href="#闭包" class="headerlink" title="闭包"></a>闭包</h2><p>我们再来回顾一下我们刚才举的例子，在刚才的<code>delay_sum</code>函数当中，我们内部实现了一个<code>sum</code>函数，我们在这个函数当中调用了<code>delay_sum</code>函数传入的参数。这种对<strong>外部作用域</strong>的变量进行引用的内部函数就称为<strong>闭包</strong>。</p>
+<p>其实这个概念很形象，因为这个函数内部调用的数据对于调用方来说是封闭的，完全是一个黑盒，除非我们查看源码，否则我们是不知道它当中数据的来源的。除了不知道来源之外，更重要的是它引用的是外部函数的变量，既然是变量就说明是动态的。也就是说我们<strong>可以通过改变某些外部变量的值来改变闭包的运行效果</strong>。</p>
+<p>这么说有点拗口，我们来看一个简单的例子。在Python当中有一个函数叫做<code>math.pow</code>其实就是计算次方的。比如我们要计算<code>x</code>的平方，那么我们应该这样写：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">math.<span class="built_in">pow</span>(x, <span class="number">2</span>)</span><br></pre></td></tr></table></figure>
+<p>但是如果我们当前场景下只需要计算平方，我们每次都要传入额外再传入一个2会显得非常麻烦，这个时候我们使用闭包，可以简化操作：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">mypow</span>(<span class="params">num</span>):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">pw</span>(<span class="params">x</span>):</span><br><span class="line">        <span class="keyword">return</span> math.<span class="built_in">pow</span>(x, num)</span><br><span class="line">    <span class="keyword">return</span> pw</span><br><span class="line">    </span><br><span class="line">pow2 = mypow(<span class="number">2</span>)</span><br><span class="line"><span class="built_in">print</span>(pow2(<span class="number">10</span>))</span><br></pre></td></tr></table></figure>
+<p>通过闭包，我们<strong>把第二个变量给固定了</strong>，这样我们只需要使用<code>pow2</code>就可以实现原来<code>math.pow(x, 2)</code>的功能了。如果我们突然需求变更需要计算3次方或者是4次方，我们只需要修改<code>mypow</code>的传入参数即可，完全不需要修改代码。</p>
+<p>实际上这也是闭包最大的使用场景，我们可以<strong>通过闭包实现一些非常灵活的功能</strong>，以及通过配置修改一些功能等操作，而不再需要通过代码写死。要知道对于工业领域来说，线上的代码是不能随便变更的，尤其是客户端，比如apple store或者是安卓商店当中的软件包，只有用户手动更新才会拉取。如果出现问题了，几乎没有办法修改，只能等用户手动更新。所以常规操作就是使用一些类似闭包的灵活功能，<strong>通过修改配置的方式改变代码的逻辑</strong>。</p>
+<p>除此之外闭包还有一个用处是可以<strong>暂存变量或者是运行时的环境</strong>。</p>
+<p>举个例子，我们来看下面这段代码：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">step</span>(<span class="params">x=<span class="number">0</span></span>):</span><br><span class="line">    x += <span class="number">5</span></span><br><span class="line">    <span class="keyword">return</span> x</span><br></pre></td></tr></table></figure>
+<p>这是没有使用闭包的函数，不管我们调用多少次，答案都是5，执行完<code>x+=5</code>之后的结果并不会被保存起来，当函数返回了，这个暂存的值也就被抛弃了。那如果我<strong>希望每次调用都是依据上次调用的结果</strong>，也就是说我们每次修改的操作都能保存起来，而不是丢弃呢？</p>
+<p>这个时候就需要使用闭包了：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">test</span>(<span class="params">x=<span class="number">0</span></span>):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">step</span>():</span><br><span class="line">        <span class="keyword">nonlocal</span> x</span><br><span class="line">        x += <span class="number">5</span></span><br><span class="line">        <span class="keyword">return</span> x</span><br><span class="line">    <span class="keyword">return</span> step</span><br><span class="line">    </span><br><span class="line">t = test()</span><br><span class="line">t()</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="number">5</span></span><br><span class="line">t()</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="number">10</span></span><br></pre></td></tr></table></figure>
+<p>也就是说我们的<code>x</code>的值被存储起来了，<strong>每次修改都会累计</strong>，而不是丢弃。这里需要注意一点，我们用到了一个新的关键字叫做<strong>nonlocal</strong>，这是Python3当中独有的关键字，用来申明当前的变量<code>x</code>不是局部变量，这样Python解释器就会去全局变量当中去寻找这个<code>x</code>，这样就能关联上<code>test</code>方法当中传入的参数x。Python2官方已经不更新了，不推荐使用。</p>
+<p>由于在Python当中也是一切都是对象，如果我们<strong>把闭包外层的函数看成是一个类</strong>的话，其实闭包和类区别就不大了，我们甚至可以给闭包返回的函数关联函数，这样几乎就是一个对象了。来看一个例子：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">student</span>():</span><br><span class="line">    name = <span class="string">&#x27;xiaoming&#x27;</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">stu</span>():</span><br><span class="line">        <span class="keyword">return</span> name</span><br><span class="line">        </span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">set_name</span>(<span class="params">value</span>):</span><br><span class="line">        <span class="keyword">nonlocal</span> name</span><br><span class="line">        name = value</span><br><span class="line">        </span><br><span class="line">    stu.set_name = set_name</span><br><span class="line">    <span class="keyword">return</span> stu</span><br><span class="line">    </span><br><span class="line">stu = student()</span><br><span class="line">stu.set_name(<span class="string">&#x27;xiaohong&#x27;</span>)</span><br><span class="line"><span class="built_in">print</span>(stu())</span><br></pre></td></tr></table></figure>
+<p>最后运算的结果是<code>xiaohong</code>，因为我们调用<code>set_name</code>改变了闭包外部的值。这样当然是可以的，但是一般情况下我们并不会用到它。和写一个<code>class</code>相比，通过闭包的方法<strong>运算速度会更快</strong>。原因比较隐蔽，是因为闭包当中没有<code>self</code>指针，从而节省了大量的变量的访问和运算，所以计算的速度要快上一些。但是闭包搞出来的伪对象是<strong>不能使用继承、派生</strong>等方法的，而且和正常的用法格格不入，所以我们知道有这样的方法就可以了，现实中并不会用到。</p>
+<h2 id="闭包的坑"><a href="#闭包的坑" class="headerlink" title="闭包的坑"></a>闭包的坑</h2><p>闭包虽然好用，但是不小心的话也是很容易踩坑的，下面介绍几个常见的坑点。</p>
+<h3 id="闭包不能直接访问外部变量"><a href="#闭包不能直接访问外部变量" class="headerlink" title="闭包不能直接访问外部变量"></a>闭包不能直接访问外部变量</h3><p>这一点我们刚才已经提到了，在闭包当中我们<strong>不能直接访问外部的变量</strong>的，必须要通过nonlocal关键字进行标注，否则的话是会报错的。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">test</span>():</span><br><span class="line">    n = <span class="number">0</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">t</span>():</span><br><span class="line">        n += <span class="number">5</span></span><br><span class="line">        <span class="keyword">return</span> n</span><br><span class="line">    <span class="keyword">return</span> t</span><br></pre></td></tr></table></figure>
+<p>比如这样的话，就会报错：</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/4lVbQH4ShicUH5Q5NIVsAdDjMiaw795L44EwzeJicNRQu45vvgjCjCPiaHHhuudDK38YciaFDqzLHT90KBBdTWMw9YA/640?wx_fmt=png&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt=""></p>
+<h3 id="闭包当中不能使用循环变量"><a href="#闭包当中不能使用循环变量" class="headerlink" title="闭包当中不能使用循环变量"></a>闭包当中不能使用循环变量</h3><p>闭包有一个很大的问题就是<strong>不能使用循环变量</strong>，这个坑藏得很深，因为单纯从代码的逻辑上来看是发现不了的。也就是说逻辑上没问题的代码，运行的时候往往会出乎我们的意料，这需要我们对底层的原理有深刻地了解才能发现，比如我们来看一个例子：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">test</span>(<span class="params">x</span>):</span><br><span class="line">    fs = []</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">3</span>):</span><br><span class="line">        <span class="keyword">def</span> <span class="title function_">f</span>():</span><br><span class="line">            <span class="keyword">return</span> x + i</span><br><span class="line">        fs.append(f)</span><br><span class="line">    <span class="keyword">return</span> fs</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">fs = test(<span class="number">3</span>)</span><br><span class="line"><span class="keyword">for</span> f <span class="keyword">in</span> fs:</span><br><span class="line">    <span class="built_in">print</span>(f())</span><br></pre></td></tr></table></figure>
+<p>在上面这个例子当中，我们使用了<code>for</code>循环来创建了3个闭包，我们使用<code>fs</code>存储这三个闭包并进行返回。然后我们通过调用<code>test</code>，来获得了这3个闭包，然后我们进行了调用。</p>
+<p>这个逻辑看起来应该没有问题，按照道理，这3个闭包是通过for循环创建的，并且在闭包当中我们用到了循环变量<code>i</code>。那按照我们的想法，最终输出的结果应该是<code>[3, 4, 5]</code>，但是很遗憾，最后我们得到的<strong>结果是[5, 5, 5]</strong>。</p>
+<p>看起来很奇怪吧，其实一点也不奇怪，因为<strong>循环变量<code>i</code>并不是在创建闭包的时候就set好的</strong>。而是当我们执行闭包的时候，我们再去寻找这个<code>i</code>对应的取值，显然当我们运行闭包的时候，循环已经执行完了，此时的<code>i</code>停在了2。所以这3个闭包的执行结果都是2+3也就是5。这个坑是由Python解释器当中对于闭包执行的逻辑导致的，我们编写的逻辑是对的，但是它并不按照我们的逻辑来，所以这一点要千万注意，如果忘记了，想要通过debug查找出来会很难。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>虽然从表面上闭包存在一些问题和坑点，但是它依然是我们<strong>经常使用的Python高级特性</strong>，并且它也是很多其他高级用法的基础。所以我们理解和学会闭包是非常有必要的，千万不能因噎废食。</p>
+<p>其实并不只是闭包，很多高度抽象的特性都或多或少的有这样的问题。因为当我们进行抽象的时候，我们固然简化了代码，增加了灵活度，但与此同时我们也让<strong>学习曲线变得陡峭</strong>，带来了更多我们需要理解和记住的内容。本质上这也是一个trade-off，好用的特性需要付出代码，易学易用的往往意味着比较死板不够灵活。对于这个问题，我们需要保持心态，不过好在初看时也许有些难以理解，但总体来说闭包还是比较简单的，我相信对你们来说一定不成问题。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://www.ailinghang.club/2023/04/01/python-iterator/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/ai.jpg">
+      <meta itemprop="name" content="Ai领航员">
+      <meta itemprop="description" content="人工智能从零入门教程">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ai领航员">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/04/01/python-iterator/" class="post-title-link" itemprop="url">Python迭代器进阶用法</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2023-04-01 20:37:46 / 修改时间：20:41:10" itemprop="dateCreated datePublished" datetime="2023-04-01T20:37:46+08:00">2023-04-01</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Python/" itemprop="url" rel="index"><span itemprop="name">Python</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>2k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>2 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>这篇文章我们依然介绍的是迭代器，不过介绍的是几个比较常用的<strong>高级用法</strong>，在实际场景当中非常实用，可以帮助我们大大简化代码的复杂度。</p>
+<h2 id="跳过开头"><a href="#跳过开头" class="headerlink" title="跳过开头"></a>跳过开头</h2><p>首先是跳过开始部分，这个在我们读取文本的时候最常用。在实际的应用当中，比如记录的日志或者是代码等等，一般来说<strong>头部都会附上一段说明</strong>，或者用注释标注或者是用特殊的符号标记。这些信息是给用到数据的程序员看的，当我们通过代码获取数据的时候，显然是希望可以过滤掉这些信息的。</p>
+<p>比如我们有一段数据，它的开头用#做了一些注释：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># This is a data for student</span></span><br><span class="line"><span class="comment"># Rows 100</span></span><br><span class="line"></span><br><span class="line">xiaoming, <span class="number">17</span>, <span class="number">99</span>;</span><br><span class="line">xiaoli, <span class="number">18</span>, <span class="number">98</span>;</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<p>常规操作当中，我们会创建一个打开文件的迭代器，我们通过遍历这个迭代器去获取文件当中的数据：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&#x27;xxxx.txt&#x27;</span>) <span class="keyword">as</span> f:</span><br><span class="line">    <span class="keyword">for</span> line <span class="keyword">in</span> f:</span><br><span class="line">        <span class="built_in">print</span>(line)</span><br></pre></td></tr></table></figure>
+<p>如果只是用来输出还好，如果我们需要加工文件当中的数据，那么头部的注释信息就会干扰我们代码的运行。我们当然可以手动加入一些判断，但是这会比较麻烦，代码也不够美观。针对这个问题，一个比较好的解决方案是<strong>dropwhile</strong>。</p>
+<p><code>dropwhile</code>是<code>itemtools</code>当中的一个函数，它可以<strong>接收一个我们自定义的过滤函数和迭代器重新生成一个新的迭代器</strong>，这个新的迭代器当中会过滤掉之前迭代器头部不符合我们要求的数据：</p>
+<p>在刚才的例子当中我们想要过滤掉头部加了#注释的部分，我们可以这么操作：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> itertools <span class="keyword">import</span> dropwhile</span><br><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&#x27;xxxx.txt&#x27;</span>) <span class="keyword">as</span> f:</span><br><span class="line">    <span class="keyword">for</span> line <span class="keyword">in</span> dropwhile(<span class="keyword">lambda</span> line: line.startswith(<span class="string">&#x27;#&#x27;</span>), f):</span><br><span class="line">        <span class="built_in">print</span>(line)</span><br></pre></td></tr></table></figure>
+<p>这样出来的结果就没有头部我们不需要的内容了。</p>
+<p>当我们知道头部不符合情况的数据的格式的时候，可以使用<code>dropwhile</code>来规定过滤的格式。如果我们<strong>知道需要过滤的条数</strong>，则可以使用另外一个工具，叫做<code>islice</code>，它的本质是一个切片函数，就像是Python当中数组的切片功能一样，可以切出迭代器当中指定片段的数据。</p>
+<p>举个例子：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> itertools <span class="keyword">import</span> dropwhile</span><br><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&#x27;xxxx.txt&#x27;</span>) <span class="keyword">as</span> f:</span><br><span class="line">    <span class="keyword">for</span> line <span class="keyword">in</span> islice(f, <span class="number">3</span>, <span class="literal">None</span>):</span><br><span class="line">        <span class="built_in">print</span>(line)</span><br></pre></td></tr></table></figure>
+<p>这样我们就会从第三行开始获取，之前的数据会被过滤掉。它其实就代表着数组当中[3: ]的切片操作。</p>
+<h2 id="迭代排列组合"><a href="#迭代排列组合" class="headerlink" title="迭代排列组合"></a>迭代排列组合</h2><p>我们都知道在C++当中有一个叫做<code>next_permutation</code>的函数，可以传入一个数组，返回下一个字典序的排列。在Python当中也有同样的功能，但是是以迭代器的形式使用的。</p>
+<p>举个简单的例子，比如我们有a, b, c三个元素，我们希望求出它的所有排列：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">items = [<span class="string">&#x27;a&#x27;</span>, <span class="string">&#x27;b&#x27;</span>, <span class="string">&#x27;c&#x27;</span>]</span><br><span class="line"><span class="keyword">from</span> itertools <span class="keyword">import</span> permutations</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> p <span class="keyword">in</span> permutations(items):</span><br><span class="line">    <span class="built_in">print</span>(p)</span><br></pre></td></tr></table></figure>
+<p><code>permutations</code>还支持多传一个参数，比如上述的排列当中我们希望只保留前两个元素，除了切片之外，我们只需要多传一个参数就好了，like this：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> p <span class="keyword">in</span> permutations(items, <span class="number">2</span>):</span><br><span class="line">    <span class="built_in">print</span>(p)</span><br></pre></td></tr></table></figure>
+<p>除了排列之外，<code>itertools</code>当中还支持组合，用法还是一样，只是把函数名称换成是<code>combinations</code>而已：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> itertools <span class="keyword">import</span> combindations</span><br><span class="line"><span class="keyword">for</span> c <span class="keyword">in</span> combinations(items):</span><br><span class="line">    <span class="built_in">print</span>(c)</span><br></pre></td></tr></table></figure>
+<p>在一般的组合当中，一个元素一旦被选中那么它接下来就会从候选集当中移除，再也不会被选中。如果我们希望获得有放回的组合，我们可以再换一个函数，这个函数名称有点长，但是名字倒也直观叫做<code>combinations_with_replacement</code>。但既然是有放回的抽样，我们<strong>需要设定元素的数量</strong>，否则抽样可以无限进行下去。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> c <span class="keyword">in</span> combinations_with_replacement(items, <span class="number">3</span>):</span><br><span class="line">    <span class="built_in">print</span>(c)</span><br></pre></td></tr></table></figure>
+<h2 id="迭代合并后的序列"><a href="#迭代合并后的序列" class="headerlink" title="迭代合并后的序列"></a>迭代合并后的序列</h2><p>上一篇文章当中我们介绍了zip可以同时迭代多个迭代器，除此之外还有一种情况是我们需要<strong>把多个迭代器串起来迭代</strong>。比如系统的日志打在了多个文件当中，我们希望找出其中有error的日志来分析。这个时候，我们希望的不是同时读取多个迭代器，而是希望能够有办法将多个迭代器的内容串联起来。这个功能就是<code>itertools</code>当中的<strong>chain</strong>方法，它接受多个迭代器，当我们遍历的时候，会自动将多个迭代器的内容串联起来，我们可以无缝迭代。</p>
+<p>举个例子：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> itertools <span class="keyword">import</span> chain</span><br><span class="line">nums = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]</span><br><span class="line">chars = [<span class="string">&#x27;a&#x27;</span>, <span class="string">&#x27;b&#x27;</span>, <span class="string">&#x27;c&#x27;</span>]</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> chain(nums, chars):</span><br><span class="line">    <span class="built_in">print</span>(i)</span><br></pre></td></tr></table></figure>
+<p>这样我们会把<code>nums</code>和<code>chars</code>当中的内容一起输出出来，<strong>就好像从头到尾只执行了一个迭代器一样</strong>。</p>
+<p>你可能会说我们不用<code>chain</code>也可以实现啊，我们可以这样：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> nums + chars:</span><br><span class="line">    <span class="built_in">print</span>(i)</span><br></pre></td></tr></table></figure>
+<p>的确，从结果上来看这样也是行得通的。但是如果我们分析一下内部执行的时候的中间变量，会发现当我们执行<code>nums</code>+<code>chars</code>的时候，实际上是<strong>先创建了一个新的临时list</strong>。然后在这个list当中存储<code>nums</code>和<code>chars</code>的数据，也就是说我们迭代的其实是这个新的list。这带来的结果是我们<strong>额外开辟了一段内存</strong>，并且花费了一些时间。如果我们使用<code>chain</code>，它并不会有这样的中间变量，完全是通过迭代器来执行的迭代，非常节省内存，这也是<code>chain</code>的优点。</p>
+<h2 id="归并迭代的内容"><a href="#归并迭代的内容" class="headerlink" title="归并迭代的内容"></a>归并迭代的内容</h2><p>对于归并操作我们应该都不陌生，在之前的归并排序以及一些题解的文章当中我们见过很多次。同样，我们在使用工具合并多个迭代器内容的时候，如果迭代器当中的内容有序，我们也可以<strong>对多个迭代器当中的元素进行归并</strong>，而不再需要我们自己手动操作。</p>
+<p>使用我们之前介绍的<code>heapq</code>的库可以非常轻松地做到这一点，我们一起来看一个例子：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">a = [<span class="number">1</span>, <span class="number">3</span>, <span class="number">5</span>]</span><br><span class="line">b = [<span class="number">2</span>, <span class="number">4</span>, <span class="number">6</span>]</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> heapq</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> c <span class="keyword">in</span> heapq.merge(a, b):</span><br><span class="line">    <span class="built_in">print</span>(c)</span><br></pre></td></tr></table></figure>
+<p>执行之后，我们会得到[1, 2, 3, 4, 5, 6]的结果。也就是说通过<code>heapq.merge</code>操作，我们把多个有序的迭代器合并到了一起。当然我们也可以自己合并，但如果我们只是需要利用当中的数据的话，使用<code>merge</code>操作可以节省内存空间。</p>
+<p>到这里内容就结束了，本文和之前的文章基本上列举完了常用的迭代器用法。当然，除了上述讲到的内容之外，Python当中的迭代器还有一些其他的用法，不过相对不太常用，感兴趣的同学可以私下了解。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+
+  
+  <nav class="pagination">
+    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+  </nav>
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Ai领航员"
+      src="/images/ai.jpg">
+  <p class="site-author-name" itemprop="name">Ai领航员</p>
+  <div class="site-description" itemprop="description">人工智能从零入门教程</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">29</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">33</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/moutsea/ai_tutorial" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;moutsea&#x2F;ai_tutorial" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/suyuxuan94@qq.com" title="E-Mail → suyuxuan94@qq.com"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.zhihu.com/people/coderliangt" title="知乎 → https:&#x2F;&#x2F;www.zhihu.com&#x2F;people&#x2F;coderliangt" rel="noopener" target="_blank"><i class="fal fa-zhihu fa-fw"></i>知乎</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ai领航员</span>
+</div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="站点总字数">72k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">1:06</span>
+  </span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+        
+
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='0,0,255' opacity='0.5' zIndex='-1' count='99' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+  <script defer src="/lib/three/three.min.js"></script>
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+
+</body>
+</html>

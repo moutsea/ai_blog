@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/l.svg">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/l.svg">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"www.ailinghang.club","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"livere","storage":true,"lazyload":false,"nav":null,"activeClass":"livere"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"manual","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="大家好，这里是Ai领航员。 最近由于ChatGPT的火热，使得人工智能再一次吸引了大量的关注。相信被点燃热情和兴趣的小伙伴也不在少数。 然而由于相关行业的资料网络上非常杂乱，并且在遇到困难时缺乏指引等问题，很多人的学习旅程迟迟没能展开。比如我就有搜集了一大堆书单但不知从何开始，或者是学习过程中遇到问题不知道向谁求助的经历。所以出于更好地帮助大家答疑解惑以及提供一个交流平台的想法，我们成立了知识星球">
+<meta property="og:type" content="website">
+<meta property="og:title" content="知识星球">
+<meta property="og:url" content="http://www.ailinghang.club/planet/index.html">
+<meta property="og:site_name" content="Ai领航员">
+<meta property="og:description" content="大家好，这里是Ai领航员。 最近由于ChatGPT的火热，使得人工智能再一次吸引了大量的关注。相信被点燃热情和兴趣的小伙伴也不在少数。 然而由于相关行业的资料网络上非常杂乱，并且在遇到困难时缺乏指引等问题，很多人的学习旅程迟迟没能展开。比如我就有搜集了一大堆书单但不知从何开始，或者是学习过程中遇到问题不知道向谁求助的经历。所以出于更好地帮助大家答疑解惑以及提供一个交流平台的想法，我们成立了知识星球">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://moutsea-blog.oss-cn-hangzhou.aliyuncs.com/image-20230314183617715.png">
+<meta property="og:image" content="https://moutsea-blog.oss-cn-hangzhou.aliyuncs.com/image-20230318114427081.png">
+<meta property="og:image" content="https://moutsea-blog.oss-cn-hangzhou.aliyuncs.com/image-20230318114713063.png">
+<meta property="og:image" content="https://moutsea-blog.oss-cn-hangzhou.aliyuncs.com/image-20230318113432408.png">
+<meta property="article:published_time" content="2023-03-02T13:28:46.000Z">
+<meta property="article:modified_time" content="2023-03-20T00:39:53.010Z">
+<meta property="article:author" content="Ai领航员">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://moutsea-blog.oss-cn-hangzhou.aliyuncs.com/image-20230314183617715.png">
+
+<link rel="canonical" href="http://www.ailinghang.club/planet/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : false,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>知识星球 | Ai领航员
+</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+<!-- hexo injector head_end end --></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+    	<a target="_blank" rel="noopener" href="https://github.com/moutsea/ai_tutorial" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Ai领航员</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-planet">
+
+    <a href="/planet/" rel="section"><i class="fa fa-compass fa-fw"></i>知识星球</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+  
+  
+
+          <div class="content page posts-expand">
+            
+
+    
+    
+    
+    <div class="post-block" lang="zh-CN">
+      <header class="post-header">
+
+<h1 class="post-title" itemprop="name headline">知识星球
+</h1>
+
+<div class="post-meta">
+  
+
+</div>
+
+</header>
+
+      
+      
+      
+      <div class="post-body">
+          <p>大家好，这里是Ai领航员。</p>
+<p>最近由于ChatGPT的火热，使得人工智能再一次吸引了大量的关注。相信被点燃热情和兴趣的小伙伴也不在少数。</p>
+<p>然而由于相关行业的资料网络上非常杂乱，并且在遇到困难时缺乏指引等问题，很多人的学习旅程迟迟没能展开。比如我就有搜集了一大堆书单但不知从何开始，或者是学习过程中遇到问题不知道向谁求助的经历。所以出于更好地帮助大家答疑解惑以及提供一个交流平台的想法，我们成立了知识星球——Ai领航员。</p>
+<p>为了成立这个星球，我们邀请到了<strong>新加坡国立大学人工智能方向在读博士后</strong>Lingo大佬（C9博士）和混迹各大公司，百万年薪的Atiyah的加盟，Lingo大佬研究领域涵盖计算机视觉、自然语言处理、多模态，并且在AiGC领域也有丰富的经验。Atiyah有多年的大厂工作经验，在计算机视觉、数据生成、多模态融合等方面有着一定的积累和研究。</p>
+<p>创始人梁唐是一线互联网公司的算法工程师，在搜广推领域有比较丰富的经验。我们三个可以算作是学术和工业界的结合，也可以看成是人工智能应用领域的结合。因此我们想要从我们自身的优点出发，针对人工智能这个新兴的技术领域做一点分享。正如星球的名称一样，我们希望做一名领航员，帮助所有感兴趣的同学遨游Ai人工智能的海洋。</p>
+<p>如果你恰好感兴趣的话，希望星球里的内容可以帮到你。</p>
+<p><img src="https://moutsea-blog.oss-cn-hangzhou.aliyuncs.com/image-20230314183617715.png" alt=""></p>
+<h2 id="星球里有谁？"><a href="#星球里有谁？" class="headerlink" title="星球里有谁？"></a>星球里有谁？</h2><h3 id="梁唐"><a href="#梁唐" class="headerlink" title="梁唐"></a>梁唐</h3><p>创始人：梁唐（同知乎，B站），ACM-ICPC国际大学生程序设计竞赛亚洲区银奖，本科毕业，自学机器学习转行，一年Java后端开发经验，6年算法从业经验。曾凭一年经验斩获，BAT前高级算法工程师offer，现于某外企担任广告算法专家。</p>
+<p>公众号Coder梁作者，三年时间笔耕不辍，写下超过800篇技术文，涵盖算法、数据结构、机器学习、大数据、分布式系统等多个领域。</p>
+<h3 id="Lingo"><a href="#Lingo" class="headerlink" title="Lingo"></a>Lingo</h3><p>合伙人：Lingo，新加坡国立大学人工智能方向在读博士后，研究方向：人工智能（AI）领域的计算机视觉（CV）、自然语言处理（NLP）以及多模态（MM）。在顶级期刊发表多篇论文，层担任审稿人。秋招斩获多个大厂年薪百万offer。</p>
+<h3 id="Atiyah"><a href="#Atiyah" class="headerlink" title="Atiyah"></a>Atiyah</h3><p>Atiyah，毕业于全球排名前十的物理系，给过诺奖的项目搬过砖，也发表过物理学论文。后来，对机器学习产生了浓厚兴趣，转行成为一名算法工程师。</p>
+<p>有多年的大厂工作经验，在计算机视觉、数据生成、多模态融合等方面有着一定的积累和研究。拿过年薪百万的offer，熟悉国内八股问法，也清楚flag系刷题、系统设计问法。</p>
+<p>未来也许还会邀请到更多大佬加入，敬请期待。</p>
+<h2 id="你能获得什么？"><a href="#你能获得什么？" class="headerlink" title="你能获得什么？"></a><strong>你能获得什么？</strong></h2><h3 id="免费问答"><a href="#免费问答" class="headerlink" title="免费问答"></a>免费问答</h3><p>我们目前核心有三个各方面领域的专家，并且各自的领域与经历非常互补。不论你以后如何选择，是想要求职或深造，都能提供非常专业的帮助和建议。</p>
+<p>选取了部分已有精彩问答如下：</p>
+<p><img src="https://moutsea-blog.oss-cn-hangzhou.aliyuncs.com/image-20230318114427081.png" alt=""></p>
+<p><img src="https://moutsea-blog.oss-cn-hangzhou.aliyuncs.com/image-20230318114713063.png" alt=""></p>
+<p>我相信我们能提供的帮助还不止于此，只要你提问，我们必将尽我们所能进行回答，希望你能带来更好的问题。</p>
+<h3 id="技术路线"><a href="#技术路线" class="headerlink" title="技术路线"></a><strong>技术路线</strong></h3><p>我们将会在星球当中搭建完整的Ai入门技术体系，提供丰富完善的技术博客，涵盖算法工程师的方方面面（得益于Coder梁的丰富积累）</p>
+<p>目前已经把Ai算法相关的文章都已经搬运完了，其中机器学习和面试经验两个专栏是只在星球更新的。</p>
+<p><img src="https://moutsea-blog.oss-cn-hangzhou.aliyuncs.com/image-20230318113432408.png" alt=""></p>
+<p>Lingo会就人工智能前言Ai研究方向，当下最前沿的技术，学术界Ai研究状况等多角度展开分享。</p>
+<h3 id="简历评估"><a href="#简历评估" class="headerlink" title="简历评估"></a><strong>简历评估</strong></h3><p>我们都有充分的面试以及被面试的经历，曾和各大公司面试官、HR们斗智斗勇，也曾斩获多家大厂的offer。目前各自最高的offer都在百万以上。</p>
+<p>可以凭借丰富的应试经验对你的简历进行评估以及建议，帮助你更好地优化，提升通过率。</p>
+<p>还会对相关行业，以及想要入行的同学提供更加具体的学习以及面试准备的建议，并且能提供一定的帮助，比如面试建议，面试之前准备等等。</p>
+<h3 id="项目"><a href="#项目" class="headerlink" title="项目"></a><strong>项目</strong></h3><p>目前正在筹备一些Ai领域的练手项目，将在不久的将来分享给大家。</p>
+<p>以上，不论大家有什么问题或者想法都欢迎给我提问，也非常非常希望大家能够多多交流，彼此共同学习和成长。</p>
+
+      </div>
+      
+      
+      
+    </div>
+    
+
+    
+    
+    
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="lv-container" data-id="city" data-uid="MTAyMC81ODEyOC8zNDU5MQ=="></div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%98%9F%E7%90%83%E9%87%8C%E6%9C%89%E8%B0%81%EF%BC%9F"><span class="nav-number">1.</span> <span class="nav-text">星球里有谁？</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A2%81%E5%94%90"><span class="nav-number">1.1.</span> <span class="nav-text">梁唐</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Lingo"><span class="nav-number">1.2.</span> <span class="nav-text">Lingo</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Atiyah"><span class="nav-number">1.3.</span> <span class="nav-text">Atiyah</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%A0%E8%83%BD%E8%8E%B7%E5%BE%97%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="nav-number">2.</span> <span class="nav-text">你能获得什么？</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%8D%E8%B4%B9%E9%97%AE%E7%AD%94"><span class="nav-number">2.1.</span> <span class="nav-text">免费问答</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8A%80%E6%9C%AF%E8%B7%AF%E7%BA%BF"><span class="nav-number">2.2.</span> <span class="nav-text">技术路线</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AE%80%E5%8E%86%E8%AF%84%E4%BC%B0"><span class="nav-number">2.3.</span> <span class="nav-text">简历评估</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%A1%B9%E7%9B%AE"><span class="nav-number">2.4.</span> <span class="nav-text">项目</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Ai领航员"
+      src="/images/ai.jpg">
+  <p class="site-author-name" itemprop="name">Ai领航员</p>
+  <div class="site-description" itemprop="description">人工智能从零入门教程</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">29</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">33</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/moutsea/ai_tutorial" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;moutsea&#x2F;ai_tutorial" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/suyuxuan94@qq.com" title="E-Mail → suyuxuan94@qq.com"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.zhihu.com/people/coderliangt" title="知乎 → https:&#x2F;&#x2F;www.zhihu.com&#x2F;people&#x2F;coderliangt" rel="noopener" target="_blank"><i class="fal fa-zhihu fa-fw"></i>知乎</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ai领航员</span>
+</div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="站点总字数">72k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">1:06</span>
+  </span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+        
+
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='0,0,255' opacity='0.5' zIndex='-1' count='99' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+  <script defer src="/lib/three/three.min.js"></script>
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script>
+NexT.utils.loadComments(document.querySelector('#lv-container'), () => {
+  window.livereOptions = {
+    refer: location.pathname.replace(CONFIG.root, '').replace('index.html', '')
+  };
+  (function(d, s) {
+    var j, e = d.getElementsByTagName(s)[0];
+    if (typeof LivereTower === 'function') { return; }
+    j = d.createElement(s);
+    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+    j.async = true;
+    e.parentNode.insertBefore(j, e);
+  })(document, 'script');
+});
+</script>
+
+</body>
+</html>

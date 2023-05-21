@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/l.svg">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/l.svg">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"www.ailinghang.club","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"livere","storage":true,"lazyload":false,"nav":null,"activeClass":"livere"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"manual","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="我们来聊聊面向对象的一些进阶使用。 __slots__如果你看过github当中一些大牛的代码，你会发现很多大牛经常在类的顶部加上__slots__关键字。如果你足够好奇，你可能会试着把这个关键字去掉再运行试试，你会发现去掉了之后什么也没有发生，一切依然运行得很好。 那么这个__slots__关键字究竟是做什么的呢？ 它主要有两个功能，我们先来说第一个功能，就是限制用户的使用。 我们都知道Pyth">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python面向对象常用规范">
+<meta property="og:url" content="http://www.ailinghang.club/2023/04/16/python-stand/index.html">
+<meta property="og:site_name" content="Ai领航员">
+<meta property="og:description" content="我们来聊聊面向对象的一些进阶使用。 __slots__如果你看过github当中一些大牛的代码，你会发现很多大牛经常在类的顶部加上__slots__关键字。如果你足够好奇，你可能会试着把这个关键字去掉再运行试试，你会发现去掉了之后什么也没有发生，一切依然运行得很好。 那么这个__slots__关键字究竟是做什么的呢？ 它主要有两个功能，我们先来说第一个功能，就是限制用户的使用。 我们都知道Pyth">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-04-16T03:29:09.000Z">
+<meta property="article:modified_time" content="2023-04-16T03:35:23.984Z">
+<meta property="article:author" content="Ai领航员">
+<meta property="article:tag" content="面向对象">
+<meta property="article:tag" content="规范">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://www.ailinghang.club/2023/04/16/python-stand/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Python面向对象常用规范 | Ai领航员</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+<!-- hexo injector head_end end --></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+    	<a target="_blank" rel="noopener" href="https://github.com/moutsea/ai_tutorial" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Ai领航员</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-planet">
+
+    <a href="/planet/" rel="section"><i class="fa fa-compass fa-fw"></i>知识星球</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://www.ailinghang.club/2023/04/16/python-stand/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/ai.jpg">
+      <meta itemprop="name" content="Ai领航员">
+      <meta itemprop="description" content="人工智能从零入门教程">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ai领航员">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Python面向对象常用规范
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2023-04-16 11:29:09 / 修改时间：11:35:23" itemprop="dateCreated datePublished" datetime="2023-04-16T11:29:09+08:00">2023-04-16</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Python/" itemprop="url" rel="index"><span itemprop="name">Python</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>2.8k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>3 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>我们来聊聊面向对象的一些进阶使用。</p>
+<h2 id="slots"><a href="#slots" class="headerlink" title="__slots__"></a>__slots__</h2><p>如果你看过github当中一些大牛的代码，你会发现很多大牛经常在类的顶部加上<code>__slots__</code>关键字。如果你足够好奇，你可能会试着把这个关键字去掉再运行试试，你会发现去掉了之后什么也没有发生，一切依然运行得很好。</p>
+<p>那么这个<code>__slots__</code>关键字究竟是做什么的呢？</p>
+<p>它主要有两个功能，我们先来说第一个功能，就是<strong>限制用户的使用</strong>。</p>
+<p>我们都知道Python是一门非常灵活的<strong>动态语言</strong>，很多在其他语言看起来完全不能容忍的事情在Python当中是可行的，这也是Python的设计理念，为了灵活和代码方便牺牲了效率。比如我们来看一个很简单的例子，由于Python是动态语言，所以类的成员甚至可以在类创建好了之后动态创建。这在静态语言当中是绝对不行的，我们只能调用类当中已有的属性，是<strong>不能或者很难</strong>添加新属性的。</p>
+<p>比如这段代码：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Exp</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self</span>):</span><br><span class="line">        self.a = <span class="literal">None</span></span><br><span class="line">        self.b = <span class="literal">None</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&quot;__main__&quot;</span>:</span><br><span class="line">    exp = Exp()</span><br><span class="line">    exp.c = <span class="number">3</span></span><br><span class="line">    <span class="built_in">print</span>(exp.c)</span><br></pre></td></tr></table></figure>
+<p>我们定义了一个类叫做<code>Exp</code>，我们为它创建了a和b两个成员。但是我们在使用的时候，<strong>对c成员进行了赋值</strong>。要知道<code>Exp</code>类当中是没有成员c的，但是程序并不会报错，我们这么运行了之后它会将c添加进这个实例当中。</p>
+<p>从一方面来看，这当然非常灵活，但是另一方面，这也留下了<strong>隐患</strong>。如果用户随意添加属性，可能会导致未知的问题，尤其在复杂的系统当中。所以有些时候为了严谨，我们会不希望用户做这种动态的修改。<code>__slots__</code>正是用来做这个的。</p>
+<p>我们把这个关键字加上，再来运行结果就不一样了：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Exp</span>:</span><br><span class="line"></span><br><span class="line">    __slots__ = [<span class="string">&#x27;a&#x27;</span>, <span class="string">&#x27;b&#x27;</span>]</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self</span>):</span><br><span class="line">        self.a = <span class="literal">None</span></span><br><span class="line">        self.b = <span class="literal">None</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&quot;__main__&quot;</span>:</span><br><span class="line">    exp = Exp()</span><br><span class="line">    exp.c = <span class="number">3</span></span><br><span class="line">    <span class="built_in">print</span>(exp.c)</span><br></pre></td></tr></table></figure>
+<p>如果你运行这段代码的话，你会得到一个报错，<strong>提示你<code>Exp</code>这个对象当中并没有c这个成员</strong>，也就是说我们只能运用<code>__slots__</code>这个关键字当中定义的成员，对于没有定义的成员不能随意创建，这样就限制了用户的使用。</p>
+<p>虽然现在大部分人使用这个关键字都是报着这个目的，但是很遗憾的是，Python创建者的初衷其实并不是这个。这就谈到了<code>__slots__</code>关键字的第二个作用，就是<strong>节省内存</strong>。</p>
+<p>如果了解过Python底层的实现原理，你会发现在Python当中<strong>为每一个实例都创建了一个字典</strong>，就是大名鼎鼎的<code>__dict__</code>字典。正是因为背后有一个字典，所以我们才可以创造出原本不存在的成员，也才支持这样动态的效果。我们可以人工地调用这个字典输出其中的内容，我们在加上<code>__slots__</code>关键字之前，输出的结果是这样的：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;<span class="string">&#x27;a&#x27;</span>: <span class="literal">None</span>, <span class="string">&#x27;b&#x27;</span>: <span class="literal">None</span>&#125;</span><br></pre></td></tr></table></figure>
+<p>但是加上了这个关键字之后，会<strong>得到一个报错</strong>，会告诉你<code>Exp</code>这个对象当中没有<code>__dict__</code>这个成员。原因很简单，因为使用<code>dict</code>来维护实例，会消耗大量的内存，额外存储了许多数据，而使用<code>__slots__</code>之后，Python内部将不再为实例创建一个字典来维护，而是会使用一个固定大小的数组，这样就节省了大量的空间。这个节省可不是一点半点，一般可以<strong>节省一半以上</strong>。也就是说牺牲了一定的灵活性，保证了性能。这一点也是<code>__slots__</code>这个关键字设计的初衷，但是现在很多人都用错了地方。</p>
+<h2 id="property"><a href="#property" class="headerlink" title="property"></a>property</h2><p>这个关键字在的文章当中曾经提到过，不过很不好意思的是，由于之前写文章的时候对它的了解还很有限，导致一些阐述存在一些谬误，所以这里再提一下这个关键字的运用作为弥补。</p>
+<p><code>property</code>可以帮我们<strong>绑定类当中一些属性的赋值和获取</strong>，也就是<code>get</code>和<code>set</code>。我们来看个例子：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Exp</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, param</span>):</span><br><span class="line">        self.param = param</span><br><span class="line"></span><br><span class="line"><span class="meta">    @property</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">param</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="keyword">return</span> self._param</span><br><span class="line"></span><br><span class="line"><span class="meta">    @param.setter</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">param</span>(<span class="params">self, value</span>):</span><br><span class="line">        self._param = value</span><br></pre></td></tr></table></figure>
+<p>这里的<code>property</code>注解会在我们调用<code>.param</code>的时候被执行，而<code>param.setter</code>会在我们为<code>param</code>这个属性赋值的时候被执行。所以你可能会奇怪，为什么我们在<code>__init__</code>方法当中初始化的时候用的是<code>self.param = param</code>而不是<code>self._param = param</code>，这是因为我们在执行前者的时候，Python<strong>一样会调用<code>@param.setter</code></strong>这个注解，所以我们没有必要写成后者的形式。当然你也可以这么写，不过两者是完全等价的。</p>
+<p>作为一个前Java程序员<strong>为类当中所有变量加上get和set方法</strong>几乎成了政治正确，所以我特别喜欢为类当中所有的属性加上<code>property</code>。但是<strong>这是不对的</strong>，加上property是非常耗时的，所以如非必要不要这么做，我们直接调用来进行赋值就好了，如果有必要，我们可以手动写上<code>get</code>和<code>set</code>方法。那么问题来了，既然不是为了规范，那么我们又为什么要用到<code>property</code>呢？</p>
+<p>答案很简单，为了<strong>校验变量类型</strong>。</p>
+<p>由于Python是动态语言，并且是隐式类型的，所以我们拿到变量的时候并不知道它究竟是什么类型，也不知道用户为给它赋值成什么类型。所以在一些情况下我们可能会希望做好限制，告诉用户只能将这个变量赋值成这个类型，否则就会报错。通过使用<code>property</code>，我们可以很方便地做到这点。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Exp</span>:</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, param</span>):</span><br><span class="line">        self.param = param</span><br><span class="line"></span><br><span class="line"><span class="meta">    @property</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">param</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="keyword">return</span> self._param</span><br><span class="line"></span><br><span class="line"><span class="meta">    @param.setter</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">param</span>(<span class="params">self, value</span>):</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> <span class="built_in">isinstance</span>(value, <span class="built_in">str</span>):</span><br><span class="line">            <span class="keyword">raise</span> TypeError(<span class="string">&#x27;Want a string&#x27;</span>)</span><br><span class="line">        self._param = value</span><br></pre></td></tr></table></figure>
+<p>除此之外，<code>property</code>还有一个用法是<strong>代替函数</strong>。举个例子：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Exp</span>:</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, param</span>):</span><br><span class="line">        self.param = param</span><br><span class="line"></span><br><span class="line"><span class="meta">    @property</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">param</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="keyword">return</span> self._param</span><br><span class="line"></span><br><span class="line"><span class="meta">    @param.setter</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">param</span>(<span class="params">self, value</span>):</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> <span class="built_in">isinstance</span>(value, <span class="built_in">str</span>):</span><br><span class="line">            <span class="keyword">raise</span> TypeError(<span class="string">&#x27;Want a string&#x27;</span>)</span><br><span class="line">        self._param = value</span><br><span class="line"></span><br><span class="line"><span class="meta">    @property</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">hello</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&#x27;hello &#x27;</span> + self.param</span><br></pre></td></tr></table></figure>
+<p>这样我们就可以通过<code>.hello</code>来代替调用一个函数，这样做其实是一种<strong>动态计算</strong>。hello的结果并没有被存储起来，之后当我们调用的时候才会执行，在一些场景下这样做会非常方便。</p>
+<h2 id="命名规范"><a href="#命名规范" class="headerlink" title="命名规范"></a>命名规范</h2><p>最后我们来看下Python对象当中的命名规范，在之前的文章当中我们曾经说过，在Python当中没有对<code>public</code>和<code>private</code>的字段做区分，<strong>所有的字段都是<code>public</code>的</strong>，也就是说用户可以拿到类当中所有的字段和方法。为了规范，程序员们约定俗成，决定所有<strong>加了下划线的方法和变量都看成是<code>private</code></strong>的，即使我们能调用，但是一般情况下我们也不这么干。</p>
+<p>所以我们通常会写两个方法，一个是公开的接口，一个是内部的实现。我们调用的时候只调用公开的接口，公开的接口再去调用内部的实现。这在Python当中已经成了惯例，因为我们在调用内部方法的时候，往往还会传入一些内部的参数。</p>
+<p>我们来看个简单的例子：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">ExpA</span>:</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">public_func</span>(<span class="params">self</span>):</span><br><span class="line">       self._private_func()</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">_private_func</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;private ExpA&#x27;</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&quot;__main__&quot;</span>:</span><br><span class="line">    exp = ExpA()</span><br><span class="line">    exp.public_func()</span><br></pre></td></tr></table></figure>
+<p>除了_之外我们经常还会看到一些<strong>两个下划线的变量和方法</strong>，那么它们之间又有什么区别呢？</p>
+<p>为了回答这个问题，我们来看下面这个例子：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">ExpA</span>:</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">public_func</span>(<span class="params">self</span>):</span><br><span class="line">       self.__private_func()</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__private_func</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;private ExpA&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">ExpB</span>(<span class="title class_ inherited__">ExpA</span>):</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">public_func</span>(<span class="params">self</span>):</span><br><span class="line">       self.__private_func()</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__private_func</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;private ExpB&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&quot;__main__&quot;</span>:</span><br><span class="line">    exp = ExpB()</span><br><span class="line">    exp.public_func()</span><br><span class="line">    exp._ExpB__private_func()</span><br><span class="line">    exp._ExpA__private_func()</span><br></pre></td></tr></table></figure>
+<p>请问最后会输出什么？</p>
+<p>我们试一下就知道，第一行输出的是<code>private ExpB</code>，这个没有问题。但是后面两个是什么？</p>
+<p>后面两个就是<code>__private_func</code>，只不过<strong>系统自动将它重新命名</strong>了。重新命名的原因也很简单，因为Python<strong>禁止加了两个下划线的方法被子类覆盖</strong>。所以这两者的区别就在这里，它们都被认为是<code>private</code>的方法和属性，但是一个下划线允许子类覆盖，而两个下划线不行。所以如果我们在开发的时候希望我们某一个方法不会被子类覆盖，那么我们就需要加上两个下划线。</p>
+<p>最后，我们来看一个小问题。在C++当中当我们的变量名和系统的关键字冲突的时候，我们往往会在变量前面加上一个_来作为区分。但是由于Python当中下划线被赋予了含义，所以我们不能这么干，那么当变量冲突的时候应该怎么办呢？答案也很简单，我们可以<strong>把下划线加在后面</strong>，比如<code>lambda_</code>。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>回顾一下今天的内容，主要是<code>__slots__</code>, <code>property</code>和下划线在类当中的使用。这三者都是Python面向对象当中<strong>经常用到</strong>的知识，了解它们不但可以让我们写出更规范的代码，也有助于帮助我们理解其他大牛的源码，因此是非常必要的。</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/" rel="tag"># 面向对象</a>
+              <a href="/tags/%E8%A7%84%E8%8C%83/" rel="tag"># 规范</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2023/04/16/python-class/" rel="prev" title="python中对象的输入方法">
+      <i class="fa fa-chevron-left"></i> python中对象的输入方法
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2023/04/16/python-decro/" rel="next" title="Python装饰器入门">
+      Python装饰器入门 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="lv-container" data-id="city" data-uid="MTAyMC81ODEyOC8zNDU5MQ=="></div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#slots"><span class="nav-number">1.</span> <span class="nav-text">__slots__</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#property"><span class="nav-number">2.</span> <span class="nav-text">property</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%91%BD%E5%90%8D%E8%A7%84%E8%8C%83"><span class="nav-number">3.</span> <span class="nav-text">命名规范</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">4.</span> <span class="nav-text">总结</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Ai领航员"
+      src="/images/ai.jpg">
+  <p class="site-author-name" itemprop="name">Ai领航员</p>
+  <div class="site-description" itemprop="description">人工智能从零入门教程</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">29</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">33</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/moutsea/ai_tutorial" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;moutsea&#x2F;ai_tutorial" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/suyuxuan94@qq.com" title="E-Mail → suyuxuan94@qq.com"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.zhihu.com/people/coderliangt" title="知乎 → https:&#x2F;&#x2F;www.zhihu.com&#x2F;people&#x2F;coderliangt" rel="noopener" target="_blank"><i class="fal fa-zhihu fa-fw"></i>知乎</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ai领航员</span>
+</div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="站点总字数">72k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">1:06</span>
+  </span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+        
+
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='0,0,255' opacity='0.5' zIndex='-1' count='99' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+  <script defer src="/lib/three/three.min.js"></script>
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script>
+NexT.utils.loadComments(document.querySelector('#lv-container'), () => {
+  window.livereOptions = {
+    refer: location.pathname.replace(CONFIG.root, '').replace('index.html', '')
+  };
+  (function(d, s) {
+    var j, e = d.getElementsByTagName(s)[0];
+    if (typeof LivereTower === 'function') { return; }
+    j = d.createElement(s);
+    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+    j.async = true;
+    e.parentNode.insertBefore(j, e);
+  })(document, 'script');
+});
+</script>
+
+</body>
+</html>
